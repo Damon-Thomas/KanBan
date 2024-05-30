@@ -1,0 +1,65 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    font-family: 'roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --dark-blue: #022449;
+    --orange: #F27D42;
+    --medium-blue: #558DCA;
+    --light-blue: #96FFFF;
+    --grey-blue: #C8EFF4;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 3rem 1fr 1.5rem;
+    background: rgb(200,239,244);
+    background: linear-gradient(152deg, var(--grey-blue) 70%, var(--light-blue) 70%, var(--medium-blue) 85%);
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.main {
+    height: 100%;
+    /* background-color: var(--medium-blue); */
+}
+.footer {
+    background-color: var(--dark-blue);
+    color: white;
+    
+    width: 100vw;
+    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin: 1rem;
+    
+}

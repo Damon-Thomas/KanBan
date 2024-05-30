@@ -7,23 +7,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
+  
+  devtool: 'inline-source-map',
+ 
   plugins: [
     new HtmlWebpackPlugin({
         template: 'src/index.html'
     }),
-],
-  devServer: {
-    watchFiles: ['src/index.html', 'src/index.js', 'src/styles.css'],
-    static: {
-        directory: path.join(__dirname, 'public'),
-      },
-    compress: true,
-    port: 9000,
-  },
+  ],
+  mode: 'development',
   module: {
     rules: [
       {
@@ -43,7 +35,12 @@ module.exports = {
     test: /\.html$/i,
     loader: "html-loader",
   },]
-},
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  
 
-mode: 'none',
-};
+ 
+  };
