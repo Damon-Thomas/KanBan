@@ -1,6 +1,6 @@
 import CloseIcon from "./img/Cancel-Button.svg"
 import {createNewBoard} from "./board.js"
-import { updatePage } from "./index.js"
+import { updateHomePage } from "./index.js"
 
 function createDialog() {
     const boardModalDialogue = document.createElement('dialog')
@@ -54,7 +54,7 @@ function createModalSubmitButton() {
         event.preventDefault();
         const boardInput = document.querySelector('#Board-Name')
         createNewBoard(boardInput.value)
-        updatePage()
+        updateHomePage()
     })
     return submitBoard
 }

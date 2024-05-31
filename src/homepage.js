@@ -16,7 +16,6 @@ function homeContent() {
     homeDiv.classList.add("content")
     homeDiv.appendChild(makeBoardButton())
     homeDiv.appendChild(createBoardModal())
-    console.log(homeDiv)
     addBoards(homeDiv)
     return homeDiv
 }
@@ -33,11 +32,10 @@ function makeBoardButton() {
 
 function addBoards(destination) {
     const boardListDiv = document.createElement('div') 
+    boardListDiv.classList.add('boardList')
     const allBoards = boardList()
     if (allBoards.length > 0) {
         for (let i = 0; i < allBoards.length; i++) {
-            console.log('this')
-            console.log(allBoards[i])
             boardListDiv.appendChild(allBoards[i])
         }
         destination.appendChild(boardListDiv)}

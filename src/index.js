@@ -1,5 +1,7 @@
 import {homeHeader, homeContent} from './homepage';
+import { boardHeader, boardContent } from './boardpage';
 import './styles.css';
+// import { boardContent } from './boardpage';
 
 
 
@@ -15,14 +17,20 @@ const main = document.querySelector(".main")
 // HomePage
 
 
-function updatePage() {
+function updateHomePage() {
     header.innerHTML = ""
     main.innerHTML = ""
     header.appendChild(homeHeader())
     main.appendChild(homeContent())
 }
 
-updatePage()
+updateHomePage()
 
+function updateBoardPage(boardName) {
+    header.innerHTML = ""
+    main.innerHTML = ""
+    header.appendChild(boardHeader(boardName))
+    main.appendChild(boardContent(boardName))
+}
 
-export {updatePage}
+export {updateHomePage, updateBoardPage}
