@@ -63,3 +63,26 @@ body {
     margin: 1rem;
     
 }
+
+.status-container {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+    max-height: 100%;
+}
+
+.status-column {
+    max-height: 95%;
+}
+
+.board-header {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-board-header, .right-board-header {
+    width: 10rem;
+}

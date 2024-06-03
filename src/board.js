@@ -7,6 +7,7 @@ createBoard("House Maintanence this year")
 
 
 function createBoard(boardname) {
+    
     let board = {name: boardname, tasks: [], statuses: ["ToDo", "In Progress", "Done"]}
     boards.push(board)
 }
@@ -22,10 +23,10 @@ function addTaskToBoard(boardname, task) {
 
 
 function addStatusToBoard(boardname, status) {
-    for (let i = 0; i < boards.length - 1; i++) {
+    for (let i = 0; i < boards.length; i++) {
         if (boards[i].name === boardname) {
             boards[i].statuses.push(status)
-            console.log(boards[i].statuses)
+            
         }
     }
     
@@ -50,6 +51,7 @@ function deleteBoard(board){
 
 // last chance notification
 function confirmDeleteBoard(boardDiv, board) {
+    
     boardDiv.innerHTML = ""
     const warningMessage = document.createElement('h3')
     warningMessage.classList.add('delete-text')
@@ -67,7 +69,7 @@ function confirmDeleteBoard(boardDiv, board) {
     cancelDeleteButton.addEventListener("click", function(event){
         event.stopPropagation()
         boardDiv.classList.remove('delete-mode')
-        console.log("cancel")
+        
         updateHomePage()
     })
     boardDiv.appendChild(warningMessage)
@@ -96,9 +98,12 @@ function boardList() {
         
 
         deleteboardDiv.addEventListener("click", function() {
-            
+             
+                
+           
             boardDiv.classList.add('delete-mode')
             confirmDeleteBoard(boardDiv, activeBoard)
+            
         })
 
 

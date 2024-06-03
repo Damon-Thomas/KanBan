@@ -53,8 +53,10 @@ function createModalSubmitButton(boardName) {
     submitStatus.setAttribute('value', 'Create Status')
     submitStatus.id = 'submit-status'
     submitStatus.addEventListener("click", function(event) {
+        console.log(boardName)
         event.preventDefault();
         const statusInput = document.querySelector('#Status-Name')
+        console.log(statusInput.value)
         // add board name to 1st property below
         addStatusToBoard(boardName, statusInput.value)
         updateBoardPage(boardName)
@@ -90,7 +92,7 @@ function openModal() {
 
 function closeModal() {
     const dialog = document.getElementById('create-status')
-    const form = document.getElementById("form")
+    const form = document.getElementById("status-form")
     dialog.close();
     form.reset()
 }
