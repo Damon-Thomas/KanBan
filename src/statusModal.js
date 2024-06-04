@@ -57,7 +57,6 @@ function createModalSubmitButton(boardName) {
         event.preventDefault();
         const statusInput = document.querySelector('#Status-Name')
         console.log(statusInput.value)
-        // add board name to 1st property below
         addStatusToBoard(boardName, statusInput.value)
         updateBoardPage(boardName)
     })

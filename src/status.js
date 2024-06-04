@@ -1,7 +1,7 @@
-import {createStatusModal, openModal} from './statusModal'
+import {createStatusModal, openModal} from './statusModal.js'
 import {boards} from "./board.js"
 import { updateBoardPage } from './index.js'
-import { openTaskModal } from './task.js'
+import { openTaskModal } from './masterTaskModal.js'
 
 function statusHandler(boardName) {
     
@@ -21,7 +21,7 @@ function statusHandler(boardName) {
         }
         }
     statusCollection.appendChild(statusCreationButton())
-    statusCollection.appendChild(taskCreationButton())
+    // statusCollection.appendChild(taskCreationButton())
     
     
     return statusCollection
@@ -50,7 +50,14 @@ function createStatus(name, board) {
         }
         updateBoardPage(board['name'])
     } )
+
+    const cardList = taskCardListByStatus(board, name)
+    console.log(cardList)
+    for (let i = 0; i < cardList.length; i++) {
+        statusContainer.appendChild(cardList[i])
+    }
     statusContainer.appendChild(deleteStatus)
+    statusContainer.appendChild(taskCreationButton(name))
     return statusContainer
 }
 
@@ -59,17 +66,76 @@ function statusCreationButton() {
     createStatusButton.classList.add('create-status-button')
     createStatusButton.textContent = 'Add New Status'
     createStatusButton.addEventListener("click", function(){
+        
         openModal()
     })
     return createStatusButton
 }
 
-function taskCreationButton() {
+function taskCardListByStatus(board, status) {
+    const cardList = []
+    for (let i = 0; i < board['tasks'].length; i++) {
+        const activeTask = board['tasks'][i]
+        console.log(activeTask)
+        if (activeTask.status === status) {
+            cardList.push(taskCardCreater(activeTask, board))
+        }
+    }
+
+    return cardList
+}
+
+function taskCardCreater(task, board) {
+    console.log(task.title)
+    const taskDiv = document.createElement('div')
+    taskDiv.classList.add('task-container')
+    taskDiv.classList.add(task.priority.replace(/\s/g, ''))
+    const taskTitle = document.createElement('h3')
+    taskTitle.classList.add('task-title')
+    taskTitle.textContent = task.title
+    const taskDeadline = document.createElement('p')
+    taskDeadline.classList.add('task-deadline')
+    taskDeadline.textContent = task.deadline
+    const deleteTaskbutton = document.createElement('button')
+    deleteTaskbutton.classList.add('delete-task')
+    deleteTaskbutton.textContent = 'Remove Task'
+    deleteTaskbutton.addEventListener("click", function() {
+        deleteTask(task, board)
+    })
+    taskDiv.appendChild(taskTitle)
+    taskDiv.appendChild(taskDeadline)
+    taskDiv.appendChild(deleteTaskbutton)
+
+    taskDiv.addEventListener("click", function() {
+        createTaskModal(board['name'], task)
+    })
+
+    return taskDiv
+}
+
+function editTaskModal(task) {
+
+}
+
+
+
+function deleteTask(task, board) {
+    for (let i=0; i < board['tasks'].length; i++) {
+        if (board['tasks'][i] === task){
+            board['tasks'].splice(i, 1)
+        }
+    }
+    updateBoardPage(board['name'])
+}
+
+
+
+function taskCreationButton(status) {
     const createTaskButton = document.createElement('button')
     createTaskButton.classList.add('create-task-button')
     createTaskButton.textContent = 'Add New Task'
     createTaskButton.addEventListener("click", function(){
-        openTaskModal()
+        openTaskModal(status)
     })
     return createTaskButton
 }

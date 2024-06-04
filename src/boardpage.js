@@ -1,7 +1,7 @@
 import { createStatusModal } from "./statusModal.js";
-import {statusHandler} from "./renameList.js"
+import {statusHandler} from "./status.js"
 import { updateHomePage } from "./index.js";
-import {createTaskModal, openTaskModal} from "./task.js"
+import {createTaskModal, openTaskModal} from "./masterTaskModal.js"
 
 
 function boardHeader(boardName) {

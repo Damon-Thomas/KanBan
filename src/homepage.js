@@ -1,5 +1,5 @@
-import {boards, createBoard, addTaskToBoard, boardList} from './board.js';
-import {createBoardModal, openModal} from "./modal.js"
+import {boardList} from './board.js';
+import {createBoardModal, openModal} from "./boardmodal.js"
 
 // Homepage Title Manager
 function homeHeader() {
@@ -30,6 +30,7 @@ function makeBoardButton() {
     return createBoardButton
 }
 
+// add boards to a destination
 function addBoards(destination) {
     const boardListDiv = document.createElement('div') 
     boardListDiv.classList.add('boardList')

@@ -13,11 +13,13 @@ function createBoard(boardname) {
 }
 
 function addTaskToBoard(boardname, task) {
-    for (let i = 0; i < boards.length - 1; i++) {
+    console.log(task)
+    for (let i = 0; i < boards.length; i++) {
         if (boards[i].name === boardname) {
             boards[i].tasks.push(task)
         }
     }
+    console.log(boards)
 }
 
 
