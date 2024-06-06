@@ -1,8 +1,7 @@
 import CloseIcon from "./img/Cancel-Button.svg"
 import { updateBoardPage } from "./index.js"
-import { addStatusToBoard, addTaskToBoard } from "./board.js"
-import { boards } from "./board.js";
-import { Task } from "./task.js";
+import { addTaskToBoard } from "./board.js"
+import { Task } from "./board.js";
 
 
 // make dialog to control form as modal
@@ -37,34 +36,20 @@ function createExitButton()  {
 } 
 
 // Create your task object form below
-function createFormInput(boardName, task) {
+function createFormInput() {
     const taskInputDiv = document.createElement('div')
     taskInputDiv.classList.add("create-task-input")
 
+    taskInputDiv.appendChild(createTextFormInput('Task-Name', "Task:"))
+    taskInputDiv.appendChild(createTextFormInput('Task-Description', "Description:"))
+    taskInputDiv.appendChild(createDateFormInput('Task-Deadline', "Deadline:"))
+    taskInputDiv.appendChild(createPriorityRadioFormInput())
+    taskInputDiv.appendChild(createTextFormInput('Task-Notes', "Note:"))
     
-   
-    
-    if(task != ""){
-        taskInputDiv.appendChild(createTextFormInput('Task-Name', "Task:", task.title))
-        taskInputDiv.appendChild(createTextFormInput('Task-Description', "Description:", task.description))
-        taskInputDiv.appendChild(createDateFormInput('Task-Deadline', "Deadline:", task.deadline))
-        taskInputDiv.appendChild(createPriorityRadioFormInput(task.priority))
-        taskInputDiv.appendChild(createTextFormInput('Task-Notes', "Note:", task.notes))
-    }
-    else{
-        taskInputDiv.appendChild(createTextFormInput('Task-Name', "Task:"))
-        taskInputDiv.appendChild(createTextFormInput('Task-Description', "Description:"))
-        taskInputDiv.appendChild(createDateFormInput('Task-Deadline', "Deadline:"))
-        taskInputDiv.appendChild(createPriorityRadioFormInput())
-        taskInputDiv.appendChild(createTextFormInput('Task-Notes', "Note:"))
-    }
-    
-    
-
     return taskInputDiv}
 
     // template for text inputs
-function createTextFormInput(formLabel, userPrompt, preTask = "") {
+function createTextFormInput(formLabel, userPrompt) {
   const createLabel = document.createElement('label')
   createLabel.setAttribute("for", formLabel)
   createLabel.textContent = userPrompt
@@ -72,7 +57,6 @@ function createTextFormInput(formLabel, userPrompt, preTask = "") {
   createInput.setAttribute("type", "text")
   createInput.setAttribute("name", formLabel)
   createInput.id = formLabel
-  createInput.value = preTask
   const formDiv = document.createElement('div')
   formDiv.appendChild(createLabel)
   formDiv.appendChild(createInput)
@@ -80,7 +64,7 @@ function createTextFormInput(formLabel, userPrompt, preTask = "") {
 }
 
 // template for date inputs
-function createDateFormInput(formLabel, userPrompt, preTask = "") {
+function createDateFormInput(formLabel, userPrompt) {
   const createLabel = document.createElement('label')
   createLabel.setAttribute("for", formLabel)
   createLabel.textContent = userPrompt
@@ -88,7 +72,6 @@ function createDateFormInput(formLabel, userPrompt, preTask = "") {
   createInput.setAttribute("type", "date")
   createInput.setAttribute("name", formLabel)
   createInput.id = formLabel
-  createInput.value = preTask
   const formDiv = document.createElement('div')
   formDiv.appendChild(createLabel)
   formDiv.appendChild(createInput)
@@ -96,7 +79,7 @@ function createDateFormInput(formLabel, userPrompt, preTask = "") {
 }
 
 // priority radio buttons
-function createPriorityRadioFormInput(preTask = "") {
+function createPriorityRadioFormInput() {
   const createFieldset = document.createElement('fieldset')
   const createLegend = document.createElement('legened')
   createLegend.textContent = "Select Task Priority"
@@ -108,9 +91,6 @@ function createPriorityRadioFormInput(preTask = "") {
   createInput1.setAttribute("name", "priority")
   createInput1.setAttribute('value', "High Priority")
   createInput1.id = "highPriority"
-  if (preTask === "High Priority") {
-    createInput1.setAttribute('checked', true)
-  }
   const createLabel1 = document.createElement('label')
   createLabel1.setAttribute("for", 'highPriority')
   createLabel1.textContent = 'High Priority'
@@ -123,9 +103,6 @@ function createPriorityRadioFormInput(preTask = "") {
   createInput2.setAttribute("name", "priority")
   createInput2.setAttribute('value', "Medium Priority")
   createInput2.id = "mediumPriority"
-  if (preTask === "Medium Priority") {
-    createInput2.setAttribute('checked', true)
-  }
   const createLabel2 = document.createElement('label')
   createLabel2.setAttribute("for", 'mediumPriority')
   createLabel2.textContent = 'Medium Priority'
@@ -138,9 +115,6 @@ function createPriorityRadioFormInput(preTask = "") {
   createInput3.setAttribute("name", "priority")
   createInput3.setAttribute('value', "Low Priority")
   createInput3.id = "lowPriority"
-  if (preTask === "Low Priority" || "") {
-    createInput3.setAttribute('checked', true)
-  }
   createInput3.setAttribute('checked', true)
   const createLabel3 = document.createElement('label')
   createLabel3.setAttribute("for", 'lowPriority')
@@ -181,11 +155,11 @@ function createModalSubmitButton(boardName) {
         const descriptionInput = document.querySelector("#Task-Description").value
         const deadlineInput = document.querySelector("#Task-Deadline").value
         const priority = document.querySelector('input[name="priority"]:checked').value;
-        console.log(priority)
+        
         const noteInput = document.querySelector("#Task-Notes").value
         const dialog = document.querySelector("#create-task")
         const statusActive = dialog.dataset.selectedStatus
-        console.log(typeof(taskNameInput))
+        
         
         const task = new Task(taskNameInput, descriptionInput, deadlineInput, priority, noteInput, statusActive)
         closeModal()
@@ -211,9 +185,9 @@ function fullForm(boardName, task) {
 
 
 // put form in dialog and return dialog for use
-function createTaskModal(boardName, task = "") {
+function createTaskModal(boardName) {
     const dialog = createDialog(boardName)
-    const form = fullForm(boardName, task)
+    const form = fullForm(boardName)
     dialog.appendChild(form)
     
     return dialog
@@ -221,6 +195,7 @@ function createTaskModal(boardName, task = "") {
 
 // dialog open controller
 function openTaskModal(status) {
+
     const dialog = document.getElementById('create-task')
     dialog.dataset.selectedStatus = status
     dialog.showModal()

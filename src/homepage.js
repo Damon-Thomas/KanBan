@@ -1,4 +1,4 @@
-import {boardList} from './board.js';
+import {boardList} from './boardDOMmanagement.js';
 import {createBoardModal, openModal} from "./boardmodal.js"
 
 // Homepage Title Manager

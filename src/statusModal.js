@@ -53,10 +53,10 @@ function createModalSubmitButton(boardName) {
     submitStatus.setAttribute('value', 'Create Status')
     submitStatus.id = 'submit-status'
     submitStatus.addEventListener("click", function(event) {
-        console.log(boardName)
+        
         event.preventDefault();
         const statusInput = document.querySelector('#Status-Name')
-        console.log(statusInput.value)
+        
         addStatusToBoard(boardName, statusInput.value)
         updateBoardPage(boardName)
     })

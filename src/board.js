@@ -1,29 +1,28 @@
-import { updateHomePage } from "."
-import { updateBoardPage } from "."
-
+// master board handling
+// 
+// master board list and 2 premade boards
 const boards = []
 createBoard("My Coding Journey")
 createBoard("House Maintanence this year")
 
-
+// create new board object - statuses array has 3 premade inputs
 function createBoard(boardname) {
     
     let board = {name: boardname, tasks: [], statuses: ["ToDo", "In Progress", "Done"]}
     boards.push(board)
 }
 
+// add task object to board in master list
 function addTaskToBoard(boardname, task) {
-    console.log(task)
+    
     for (let i = 0; i < boards.length; i++) {
         if (boards[i].name === boardname) {
             boards[i].tasks.push(task)
         }
-    }
-    console.log(boards)
+    } 
 }
 
-
-
+// add status to statuses array in board object
 function addStatusToBoard(boardname, status) {
     for (let i = 0; i < boards.length; i++) {
         if (boards[i].name === boardname) {
@@ -34,100 +33,59 @@ function addStatusToBoard(boardname, status) {
     
 }
 
-function createNewBoard(boardtitle) {
-    const dialog = document.getElementById('create-board')
-    const form = document.getElementById("form")
-    createBoard(boardtitle)
-    dialog.close();
-    form.reset()
-    
-    boardList()
-}
-
-// delete the board from the list
+// delete the board from master list
 function deleteBoard(board){
     let index = boards.indexOf(board)
     boards.splice(index, 1)
-    updateHomePage()
-}
-
-// last chance notification
-function confirmDeleteBoard(boardDiv, board) {
     
-    boardDiv.innerHTML = ""
-    const warningMessage = document.createElement('h3')
-    warningMessage.classList.add('delete-text')
-    const finalDeleteButton = document.createElement('button')
-    finalDeleteButton.classList.add('delete-button')
-    warningMessage.textContent = `Are you sure you want to delete your "${board["name"]}" board? This CANNOT be undone.`
-    finalDeleteButton.textContent = "Delete"
-    finalDeleteButton.addEventListener("click", function(event) {
-        event.stopPropagation()
-        deleteBoard(board)
-    })
-    const cancelDeleteButton = document.createElement('button')
-    cancelDeleteButton.classList.add('cancel-button')
-    cancelDeleteButton.textContent = "Cancel"
-    cancelDeleteButton.addEventListener("click", function(event){
-        event.stopPropagation()
-        boardDiv.classList.remove('delete-mode')
-        
-        updateHomePage()
-    })
-    boardDiv.appendChild(warningMessage)
-    boardDiv.appendChild(cancelDeleteButton)
-    boardDiv.appendChild(finalDeleteButton)
 }
 
-
-
-// Create Board Nodes
-function boardList() {
-    const theList = []
-    for (let i = 0; i <= boards.length-1; i++) {
-        const activeBoard = boards[i]
-        
-        const boardDiv = document.createElement('div')
-        boardDiv.classList.add('board-button')
-        const boardName = document.createElement("h1")
-        boardName.textContent = activeBoard['name']
-        const numBoardTasks = activeBoard['tasks'].length
-        const taskNumber = document.createElement('p')
-        taskNumber.textContent = `Pending Tasks: ${numBoardTasks}`
-        const deleteboardDiv = document.createElement('button')
-        deleteboardDiv.textContent = "Delete Board"
-        deleteboardDiv.classList.add('delete')
-        
-
-        deleteboardDiv.addEventListener("click", function() {
-             
-                
-           
-            boardDiv.classList.add('delete-mode')
-            confirmDeleteBoard(boardDiv, activeBoard)
-            
-        })
-
-
-
-
-
-
-        boardDiv.addEventListener("click", function(event) {
-            event.stopPropagation()
-            if (boardDiv.classList.contains('delete-mode')) {
-                return
-            }
-            
-            updateBoardPage(activeBoard['name'])
-        })
-        boardDiv.appendChild(boardName)
-        boardDiv.appendChild(taskNumber)
-        boardDiv.appendChild(deleteboardDiv)
-        theList.push(boardDiv)
+// delete status from specified board
+function removeStatus(board, status){
+    for (let i = 0; i < (board['statuses'].length); i++){
+        if (board['statuses'][i] === status) {
+            let index = board['statuses'].indexOf(status)
+            board['statuses'].splice(index, 1)
+        }
     }
-    
-    return theList
 }
 
-export {boards, createBoard, addTaskToBoard, createNewBoard, boardList, addStatusToBoard}
+// delete task from specified board
+function deleteTask(task, board) {
+    for (let i=0; i < board['tasks'].length; i++) {
+        if (board['tasks'][i] === task){
+            board['tasks'].splice(i, 1)
+        }
+    }}
+
+function findBoardFromBoardName(boardname){
+    for(let i = 0; i < boards.length; i++) {
+        if (boards[i]['name'] === boardname ){
+            return boards[i]
+        }
+    }
+}
+
+function replaceTask(task, newTask, boardName) {
+    const board = findBoardFromBoardName(boardName)
+    for (let i=0; i < board['tasks'].length; i++) {
+        if (board['tasks'][i] === task){
+            board['tasks'][i] = newTask
+        }
+    }}
+
+
+// task constructor
+function Task(title, description, deadline, priority, notes, status) {
+
+    this.title = title;
+    this.description = description;
+    this.deadline = deadline;
+    this.priority = priority;
+    this.notes = notes
+    this.status = status
+    }
+
+
+
+export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, removeStatus, deleteTask, replaceTask}

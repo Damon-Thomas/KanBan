@@ -1,5 +1,5 @@
 import CloseIcon from "./img/Cancel-Button.svg"
-import {createNewBoard} from "./board.js"
+import {createNewBoard} from "./boardDOMmanagement.js"
 import { updateHomePage } from "./index.js"
 
 function createDialog() {

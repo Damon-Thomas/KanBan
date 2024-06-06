@@ -26,7 +26,7 @@ function updateHomePage() {
 
 updateHomePage()
 
-function updateBoardPage(boardName) {
+function updateBoardPage(boardName,) {
     header.innerHTML = ""
     main.innerHTML = ""
     header.appendChild(boardHeader(boardName))

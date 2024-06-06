@@ -1,9 +1,9 @@
 import { createStatusModal } from "./statusModal.js";
 import {statusHandler} from "./status.js"
 import { updateHomePage } from "./index.js";
-import {createTaskModal, openTaskModal} from "./masterTaskModal.js"
+import {createTaskModal} from "./createTaskModal.js"
 
-
+// header containing home button and board title
 function boardHeader(boardName) {
     const headerDiv = document.createElement('div')
     headerDiv.classList.add("board-header")
@@ -15,6 +15,8 @@ function boardHeader(boardName) {
     headerDiv.appendChild(emptyDiv)
     return headerDiv;
 }
+
+// create content div and add - status div + status modal + task modal
 function boardContent(boardName) {
     const boardDiv = document.createElement('div')
     boardDiv.classList.add("board-content")
@@ -25,6 +27,7 @@ function boardContent(boardName) {
     return boardDiv
 }
 
+// load homepage
 function returnHome(){
     const homeButton = document.createElement('button')
     const homeDiv = document.createElement('div')
@@ -36,10 +39,12 @@ function returnHome(){
     return homeDiv
 }
 
+// create board title heading
 function boardTitle(boardName){
     const title = document.createElement('h1');
     title.textContent = boardName;
     title.classList.add('board-title');
     return title
 }
+
 export {boardContent, boardHeader}
