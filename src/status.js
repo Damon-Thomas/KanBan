@@ -1,8 +1,9 @@
-import {boards, removeStatus, deleteTask} from "./board.js"
+import {boards, removeStatus, deleteTask, deleteAllTasksWithStatus} from "./board.js"
 import { updateBoardPage } from './index.js'
 import {openTaskModal} from "./createTaskModal.js"
 import { openModal } from "./statusModal.js"
 import { createEditTaskModal, openEditTaskModal } from "./editTask.js"
+import { createDeleteStatusModal, openDeleteStatusModal } from "./deletestatusmodal.js"
 
 // status column handler
 // create status columns and create new button
@@ -49,18 +50,21 @@ function createStatusContainerTitle(name) {
 }
 
 // create button to remove status from board object in master list and refresh screen
-function createDeleteStatusButton(name, board) {
+function createDeleteStatusButton(status, board) {
     const deleteStatus = document.createElement('button')
     deleteStatus.classList.add('delete-status-button')
     deleteStatus.textContent = 'Remove Status'
     deleteStatus.addEventListener("click", function(){   
-        deleteStatusButtonFunction(name, board)
+        createDeleteStatusModal(board['name'])
+        openDeleteStatusModal(status)
+
 })
     return deleteStatus}
 
 // remove status from board object
 function deleteStatusButtonFunction(status, board) {
     removeStatus(board, status)
+    deleteAllTasksWithStatus(board, status)
     updateBoardPage(board['name'])
 } 
 
@@ -131,7 +135,7 @@ function taskCardCreater(task, board) {
         const dialog = createEditTaskModal(board.name, task)
         container.appendChild(dialog)
         openEditTaskModal(task.status)
-        console.log(boards)
+       
         
     })
 // 
@@ -193,4 +197,4 @@ function deleteTaskButtonFunction(task, board) {
 
 
 
-export {statusHandler}
+export {statusHandler, deleteStatusButtonFunction}

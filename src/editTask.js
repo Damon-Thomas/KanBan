@@ -17,12 +17,12 @@ function createDialog(boardName) {
 // make form to store user input nodes
 function makeTaskFormElement() {
     const createTaskForm = document.createElement('form')
-    createTaskForm.id = "task-form"
+    createTaskForm.id = "edittask-form"
     return createTaskForm
 }
 
 // exit button with image to close and reset modal
-function createExitButton()  {
+function createExitButton(boardName, task)  {
     const exitButton = document.createElement('button')
     exitButton.classList.add("exit-button")
     exitButton.setAttribute("type", "button")
@@ -31,15 +31,13 @@ function createExitButton()  {
     exitButton.id = 'task-close-modal'
     exitButton.addEventListener("click", function(event) {
         event.preventDefault();
-        closeModal()
+        closeModal(boardName, task)
     })
     return exitButton
 } 
 
 // Create your task object form below
 function createFormInput(task) {
-    console.log(task)
-    
     const taskInputDiv = document.createElement('div')
     taskInputDiv.classList.add("edit-task-input")
 
@@ -97,7 +95,6 @@ function createPriorityRadioFormInput(taskValue) {
   createInput1.setAttribute('value', "High Priority")
   createInput1.id = "highPriority"
   if(taskValue === "High Priority"){
-    console.log('high fire')
     createInput1.setAttribute('checked', true)
   }
  
@@ -114,7 +111,6 @@ function createPriorityRadioFormInput(taskValue) {
   createInput2.setAttribute('value', "Medium Priority")
   createInput2.id = "mediumPriority"
   if(taskValue === "Medium Priority"){
-    console.log('med fire')
     createInput2.setAttribute('checked', true)
   }
   
@@ -131,7 +127,6 @@ function createPriorityRadioFormInput(taskValue) {
   createInput3.setAttribute('value', "Low Priority")
   createInput3.id = "lowPriority"
   if(taskValue === "Low Priority"){
-    console.log('low fire')
     createInput3.setAttribute('checked', true)
   }
   
@@ -158,7 +153,7 @@ function createPriorityRadioFormInput(taskValue) {
 function createModalSubmitButton(boardName, task) {
     const saveTask = document.createElement('input')
     saveTask.setAttribute('type', 'submit')
-    saveTask.setAttribute('form', 'task-form')
+    saveTask.setAttribute('form', 'edittask-form')
     saveTask.setAttribute('name', 'edit-task')
     saveTask.setAttribute('value', 'Save')
     saveTask.id = 'submit-Task'
@@ -180,10 +175,8 @@ function createModalSubmitButton(boardName, task) {
         
         
         const newtask = new Task(taskNameInput, descriptionInput, deadlineInput, priority, noteInput, statusActive)
-        console.log(newtask)
         replaceTask(task, newtask, boardName)
-        closeModal()
-        console.log('pre update')
+        closeModal(boardName, task)
         updateBoardPage(boardName)
         
     })
@@ -194,7 +187,7 @@ function createModalSubmitButton(boardName, task) {
 // compile completed form
 function fullForm(boardName, task) {
     const form = makeTaskFormElement()
-    const exit = createExitButton()
+    const exit = createExitButton(boardName, task)
     const input = createFormInput(task)
     const submit = createModalSubmitButton(boardName, task)
     form.appendChild(exit)
@@ -221,11 +214,18 @@ function openEditTaskModal(status) {
 }
 
 // dialog close controller
-function closeModal() {
+function closeModal(boardName, task) {
     const dialog = document.getElementById('edit-task')
-    const form = document.getElementById("task-form")
+    const form = document.getElementById("edittask-form")
     dialog.close();
-    form.reset()
+    form.innerHTML = ""
+    form.appendChild(fullForm(boardName, task))
+    // updateScreen(boardName)
+    
+}
+
+function updateScreen(boardName) {
+  updateBoardPage(boardName)
 }
 
 // exporting created dialog and open controller

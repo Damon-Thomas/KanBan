@@ -175,7 +175,7 @@ function createModalSubmitButton(boardName) {
 function fullForm(boardName, task) {
     const form = makeTaskFormElement()
     const exit = createExitButton()
-    const input = createFormInput(boardName, task)
+    const input = createFormInput()//boardName, task
     const submit = createModalSubmitButton(boardName)
     form.appendChild(exit)
     form.appendChild(input)

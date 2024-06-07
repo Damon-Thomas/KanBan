@@ -2,6 +2,7 @@ import { createStatusModal } from "./statusModal.js";
 import {statusHandler} from "./status.js"
 import { updateHomePage } from "./index.js";
 import {createTaskModal} from "./createTaskModal.js"
+import { createDeleteStatusModal } from "./deletestatusmodal.js";
 
 // header containing home button and board title
 function boardHeader(boardName) {
@@ -23,6 +24,7 @@ function boardContent(boardName) {
     boardDiv.appendChild(statusHandler(boardName))
     boardDiv.appendChild(createStatusModal(boardName))
     boardDiv.appendChild(createTaskModal(boardName))
+    boardDiv.appendChild(createDeleteStatusModal(boardName))
     
     return boardDiv
 }

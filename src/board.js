@@ -74,6 +74,19 @@ function replaceTask(task, newTask, boardName) {
         }
     }}
 
+function deleteAllTasksWithStatus(board, status) {
+    const fullTaskList = board['tasks'].length
+    let counter = 0
+    for (let i = 0; i < fullTaskList; i++) {
+        if(board['tasks'][counter].status === status){
+            board['tasks'].splice(counter, 1)
+            continue
+        }
+        counter++
+    }
+}
+
+
 
 // task constructor
 function Task(title, description, deadline, priority, notes, status) {
@@ -88,4 +101,4 @@ function Task(title, description, deadline, priority, notes, status) {
 
 
 
-export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, removeStatus, deleteTask, replaceTask}
+export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, removeStatus, deleteTask, replaceTask, deleteAllTasksWithStatus, findBoardFromBoardName}
