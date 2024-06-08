@@ -1,6 +1,7 @@
 import {homeHeader, homeContent} from './homepage';
 import { boardHeader, boardContent } from './boardpage';
 import './styles.css';
+import { MasterBoardHeader, masterBoardContent } from './masterboardpage';
 // import { boardContent } from './boardpage';
 
 
@@ -33,4 +34,11 @@ function updateBoardPage(boardName) {
     main.appendChild(boardContent(boardName))
 }
 
-export {updateHomePage, updateBoardPage}
+function updateMasterBoardPage() {
+    header.innerHTML = ""
+    main.innerHTML = ""
+    header.appendChild(MasterBoardHeader())
+    main.appendChild(masterBoardContent())
+}
+
+export {updateHomePage, updateBoardPage, updateMasterBoardPage}

@@ -1,6 +1,7 @@
 import { createBoard, boards } from "./board";
 import { confirmDeleteBoard } from "./lastchancehandler";
-import { updateBoardPage } from ".";
+import { updateBoardPage, updateMasterBoardPage } from ".";
+import deleteIcon from "./img/trash-2.svg"
 
 
 // Board DOM Management
@@ -26,7 +27,8 @@ function deleteBoardButton(boardDiv, activeBoard) {
 // delete board button creation
 function createDeleteBoardButton(boardDiv, activeBoard) {
     const deleteboardDiv = document.createElement('button')
-    deleteboardDiv.textContent = "Delete Board"
+    console.log(deleteIcon)
+    deleteboardDiv.innerHTML = `<img class= 'trash' src= ${deleteIcon} />`
     deleteboardDiv.classList.add('delete-board-button')
     
     deleteboardDiv.addEventListener("click", function() {
@@ -59,9 +61,10 @@ function createBoardNode(activeBoard){
     const boardDiv = document.createElement('div')
     boardDiv.classList.add('board-div')
     
+    boardDiv.appendChild(createDeleteBoardButton(boardDiv, activeBoard))
     boardDiv.appendChild(createBoardTitle(activeBoard))
     boardDiv.appendChild(createTaskTrackerNode(activeBoard))
-    boardDiv.appendChild(createDeleteBoardButton(boardDiv, activeBoard))
+    
     boardDiv.addEventListener("click", function(event) {
         toBoardPage(event, boardDiv, activeBoard)
     })
@@ -90,4 +93,44 @@ function boardList() {
     return theList
 }
 
-export {createNewBoard, boardList}
+function masterBoardNode() {
+    const boardDiv = document.createElement('div')
+    boardDiv.classList.add('board-div')
+    boardDiv.id = 'master-board' 
+    const placeHolder = document.createElement('div')
+    placeHolder.classList.add('empty')
+    boardDiv.appendChild(placeHolder)    
+    boardDiv.appendChild(createMasterBoardTitle())
+    boardDiv.appendChild(createMasterTaskTrackerNode())
+    boardDiv.addEventListener("click", function(event) {
+        toMasterBoardPage(event, boardDiv)
+    })
+    return boardDiv
+}
+
+function toMasterBoardPage(event, boardDiv) {
+    event.stopPropagation() // don't select parent
+    updateMasterBoardPage() //refresh screen
+    }
+
+function createMasterBoardTitle(){
+    const title = document.createElement('h1')
+    title.classList.add("board-card-title")
+    title.textContent = "Master Board"
+    return title
+}
+
+function createMasterTaskTrackerNode() {
+    let numTotalTasks = 0
+    for (let i = 0; i < boards.length; i++){
+        numTotalTasks += boards[i]['tasks'].length
+    }
+
+
+    const taskNumber = document.createElement('p')
+    taskNumber.textContent = `Total Tasks: ${numTotalTasks}`
+    
+    return taskNumber
+}
+
+export {createNewBoard, boardList, masterBoardNode}

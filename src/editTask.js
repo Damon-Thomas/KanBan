@@ -1,5 +1,5 @@
 import CloseIcon from "./img/Cancel-Button.svg"
-import { updateBoardPage } from "./index.js"
+import { updateBoardPage, updateMasterBoardPage } from "./index.js"
 import { addTaskToBoard } from "./board.js"
 import { Task } from "./board.js";
 import { replaceTask } from "./board.js";
@@ -177,7 +177,14 @@ function createModalSubmitButton(boardName, task) {
         const newtask = new Task(taskNameInput, descriptionInput, deadlineInput, priority, noteInput, statusActive)
         replaceTask(task, newtask, boardName)
         closeModal(boardName, task)
-        updateBoardPage(boardName)
+        console.log(document.getElementById('master-board-title'))
+        if (document.getElementById('master-board-title') === null) {
+          updateBoardPage(boardName)
+        }
+        else {
+          updateMasterBoardPage()
+        }
+        
         
     })
     return saveTask

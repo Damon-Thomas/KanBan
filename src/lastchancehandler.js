@@ -6,10 +6,13 @@ import { deleteBoard } from "./board"
 function confirmDeleteBoard(boardDiv, board) {
     
     boardDiv.innerHTML = ""
+    const buttonDiv = document.createElement('div')
+    buttonDiv.classList.add('button-container')
     
     boardDiv.appendChild(createWarningMessage(board))
-    boardDiv.appendChild(createCancelDeleteButton(boardDiv))
-    boardDiv.appendChild(createFinalDeleteButton(board))
+    buttonDiv.appendChild(createCancelDeleteButton(boardDiv))
+    buttonDiv.appendChild(createFinalDeleteButton(board))
+    boardDiv.appendChild(buttonDiv)
 }
 
 // cancel delete button creation 

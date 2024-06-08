@@ -1,22 +1,28 @@
-import {boardList} from './boardDOMmanagement.js';
+import {boardList, masterBoardNode} from './boardDOMmanagement.js';
 import {createBoardModal, openModal} from "./boardmodal.js"
+import { masterBoardContent } from './masterboardpage.js';
 
 // Homepage Title Manager
 function homeHeader() {
-    const title = document.createElement('h1');
-    title.textContent = "Kanban Board";
+    const title = document.createElement('div');
+    title.insertAdjacentHTML("afterbegin", "<h1>Kan<span class ='accent-title'>ban</span> Board</h1>");
+    // title.innerHTML("<h1>Kan<span>ban</span> Board</h1>");
     title.classList.add('main-title');
     return title;
 }
 
 // Homepage Content Manager
 function homeContent() {
-    
+    const homeDivContent = document.createElement('div')
+    homeDivContent.classList.add('content-content')
     const homeDiv = document.createElement('div')
     homeDiv.classList.add("content")
     homeDiv.appendChild(makeBoardButton())
-    homeDiv.appendChild(createBoardModal())
-    addBoards(homeDiv)
+
+    addMasterBoard(homeDivContent)
+    homeDivContent.appendChild(createBoardModal())
+    addBoards(homeDivContent)
+    homeDiv.appendChild(homeDivContent)
     return homeDiv
 }
 
@@ -41,6 +47,9 @@ function addBoards(destination) {
         }
         destination.appendChild(boardListDiv)}
 }
+
+function addMasterBoard(destination) {
+    destination.appendChild(masterBoardNode())}
 
 
 

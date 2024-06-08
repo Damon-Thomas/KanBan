@@ -8,11 +8,41 @@ import { createDeleteStatusModal, openDeleteStatusModal } from "./deletestatusmo
 // status column handler
 // create status columns and create new button
 function statusHandler(boardName) {
+    
     const statusCollection = createStatusCollection()
     fillStatusCollection(statusCollection, boardName)
     statusCollection.appendChild(statusCreationButton())
     
     return statusCollection
+}
+
+function masterHandler() {
+    console.log('handler')
+    const taskCollection = createTaskCollection()
+    console.log(taskCollection)
+    fillTaskCollection(taskCollection)
+    console.log(taskCollection)
+    return taskCollection
+}
+
+function fillTaskCollection(taskCollection){
+    console.log('fill')
+    for (let i in boards) {
+        console.log('in1')
+        for (let x in boards[i]['tasks']){
+            console.log(boards[i]['tasks'][x])
+            console.log(boards[i])
+            taskCollection.appendChild(taskCardCreater(boards[i]['tasks'][x], boards[i]))
+        }
+    }
+}
+
+
+
+function createTaskCollection() {
+    const taskCollection = document.createElement('div')
+    taskCollection.classList.add('task-container')
+    return taskCollection
 }
 
 // create main status div
@@ -197,4 +227,4 @@ function deleteTaskButtonFunction(task, board) {
 
 
 
-export {statusHandler, deleteStatusButtonFunction}
+export {statusHandler, deleteStatusButtonFunction, masterHandler}
