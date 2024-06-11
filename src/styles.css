@@ -2,11 +2,11 @@
     --dark-overlay: #263238;
     --accent: #fed36a;
     --light-grey: #455a64;
-    --back-ground: #1e1e1e;
+    --back-ground: #212832;
     --white: #ffffff;
     --warning: red;
     --accent-font: #212832;
-
+    --light-text: #8CAAB9;
 
 }
 
@@ -40,18 +40,12 @@ body {
     display: grid;
     grid-template-rows: 15vh 80vh 5vh;
     background-color: var(--back-ground);
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    *::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    *{
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    }
     
 }
+
+
+
+
 .header {
     display: flex;
     justify-content: center;
@@ -62,7 +56,8 @@ body {
 }
 
 .main {
-    height: 100%;
+    max-height: 100%; 
+    
     
     
     
@@ -72,16 +67,19 @@ body {
 .content-content {
     width: 100%;
     height: 100%;
-    /* overflow-y: scroll; */
     
-    /* box-sizing: content-box; */
-    overflow: auto;
 }
+
 
 .content {
     width: 100%;
     height: 100%;
     
+    
+}
+
+.make-board-container {
+    scrollbar-gutter: stable;
 }
 
 .content, .content-content {
@@ -94,16 +92,34 @@ body {
     max-height: 95%;
     
     
+    
 }
 
 .accent-title {
     color: var(--accent);
 }
 
-.boardList {
+.board-header-container {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 17.5rem;
+    overflow: auto;
+    scrollbar-gutter: stable;
+
+}
+
+.boardList {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
     gap: 1.5rem;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+    scrollbar-color: var(--back-ground) var(--accent);
 }
 .footer {
     background-color: var(--light-grey);
@@ -135,7 +151,9 @@ body {
     display: flex;
     gap: 1rem;
     /* padding: 2rem; */
-    max-height: 100%;
+    height: 100%;
+
+    
 }
 
 .status-column {
@@ -171,6 +189,9 @@ body {
     
 }
 
+.board-content {
+    height: 100%;
+}
 .board-card-title {
     font-size: 1.5rem;
     position: absolute;
@@ -189,11 +210,9 @@ body {
 
 .board-div {
     width: 80vw;
-    height: 5rem;
+    min-height: 5rem;
     background-color: var(--dark-overlay);
-
     position: relative;
-    
     display: flex;
     text-align: center;
     align-items: center;
@@ -206,41 +225,309 @@ body {
 }
 
 .delete-mode {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    line-height: 1.15;
+    
+}
+
+.delete-text {
+    font-size: 1rem;
+    
+    text-wrap: balance;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 1rem;
+    width: 90%;
+    padding-right: 10%;
+    
+}
+
+.delete-button, .cancel-button {
+    font-size: 1.25rem;
+    height: 2.25rem;
+    border: none;
+    box-shadow: 0px 0px 4px var(--light-grey);
+}
+
+.delete-button {
+    background-color: #B3261E;  
+    width: clamp(5rem, 30%, 8rem);}
+    
+.cancel-button {
+    background-color: var(--accent);
+    width: clamp(7.5rem, 60%, 12rem);}
+
+.modal {
+background: var(--dark-overlay);
+background: linear-gradient(0deg, var(--dark-overlay) 80%, var(--accent) 80%);
+   position: relative;
+   border: none;
+   box-shadow: 4px 4px 4px var(--back-ground);
+   min-height: 30vh;
+   min-width: 40vw;
+   
+    
+}
+
+#form {
+    padding-top: 15%;
+}
+
+#form, #task-form, #status-form, #edittask-form {
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: space-around;
+}
+.create-board-input, .create-task-input, .create-status-input, .edit-task-input {
     display: flex;
     flex-direction: column;
     gap: .5rem;
     
 }
 
-.delete-text {
+#create-task{
+    background: var(--dark-overlay);
+    background: linear-gradient(0deg, var(--dark-overlay) 90%, var(--accent) 90%);
+    padding: 8% 1rem 1rem 1rem;
+}
+
+#task-close-modal {
+    top: .25rem
+
+}
+
+textarea {
+    height: auto !important;
+    max-width: 15rem;
+}
+.edit-task-input {
+    gap: 1.25rem;
+}
+
+#edit-task {
+    background: var(--dark-overlay);
+    background: linear-gradient(0deg, var(--dark-overlay) 90%, var(--accent) 90%);
+    padding: 8% 1rem 1rem 1rem;
+}
+
+/* #Edit-Task-Notes {
+    height: 3rem;
+} */
+
+.edit-task-input > div > label, .edit-task-input > fieldset > legend {
     font-size: .75rem;
 }
 
-.button-container {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+
+
+#Edit-Task-Name {
+    border: none;
+    background-color: var(--dark-overlay);
+    color: var(--white);
+    font-size: 1.75rem;
+    padding-left: 0px;
+    font-weight: 900;
 }
 
-.delete-button {
-    background-color: #B3261E;
+#Edit-Task-Name:focus {
+    outline: none;
+}
+
+/* #edittask-form {
     
+
 }
 
-.cancel-button {
-    background-color: var(--accent);
+#edit-task-input > div {
+
+} */
+
+.create-task-input > div, .edit-task-input > div {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .exit-button {
-    background-color: var(--back-ground);
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    position: absolute;
+    top: 5%;
+    right: 1rem;
     border: none;
+    
+}
+.exit-button > img {
+    height: 2rem;
+    width: 2rem;
+    
+    
+}
+label, legend{
+    font-weight: 900;
+    color: var(--white);
+    /* text-shadow: 0 0 1px var(--white); */
 }
 
-.modal {
-    background-color: var(--back-ground);
+input {
+    background-color: var(--white);
+    color: var(--back-ground);
+    border: none;
+    /* box-shadow: 0 0 1px white; */
+    margin: 0;
+    padding-left: .25rem;
+    /* height: 1.5rem; */
+}
+
+input[type="radio"] {
+    accent-color: var(--accent);
+}
+
+#submit-board, #submit-Task, #submit-status {
+    background-color: var(--accent);
+    color: var(--accent-font);
+    height: 1.5rem;
+    width: 6rem;
+    border: none;
+    
+}
+
+fieldset {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+fieldset > div {
+    display: flex;
+    gap: .5rem;
+}
+
+fieldset > div > input {
+    outline: none;
+    display: block;
+    box-shadow: none;
+}
+
+
+.modal-title {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--white);
+}
+
+.home-button {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    font-weight: 900;
+}
+
+.board-header {
+    padding: 0 1rem;
+}
+
+.board-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.status-container {
+    padding: 0 1rem;
+    max-height: 95%;
+}
+
+.task-collection {
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-color: var(--accent) var(--back-ground);
+    
+}
+
+.status-column {
+    background-color: var(--light-grey);
+    width: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 100%;
+    
+    
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.status-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    height: 3rem;
+}
+
+.task-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: .5rem;
+    
+}
+.task-container {
+    background-color: var(--dark-overlay);
+    width: 10rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+
+}
+
+.delete-status-button, .create-task-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: .25rem;
+}
+
+.status-header-buttons {
+    display: flex;
+    gap: .5rem;
+    
+}
+
+.status-header-buttons {
+    visibility: hidden;
+}
+
+.status-trash, .addIcon  {
+    visibility: visible;
+}
+
+.status-header-buttons:hover  {
+    visibility: visible;
+}
+
+.delete-status-caption, .create-task-caption {
+    font-size: .5rem;
+    width: 1.5rem;
 }
 
 ::backdrop{
     background-color: var(--back-ground);
-    opacity: .8;
+    opacity: .9;
 }

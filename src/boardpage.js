@@ -3,7 +3,7 @@ import {statusHandler} from "./status.js"
 import { updateHomePage } from "./index.js";
 import {createTaskModal} from "./createTaskModal.js"
 import { createDeleteStatusModal } from "./deletestatusmodal.js";
-
+import HomeIcon from "./img/home.svg"
 // header containing home button and board title
 function boardHeader(boardName) {
     const headerDiv = document.createElement('div')
@@ -31,12 +31,13 @@ function boardContent(boardName) {
 
 // load homepage
 function returnHome(){
-    const homeButton = document.createElement('button')
+    const homeButton = document.createElement('p')
     const homeDiv = document.createElement('div')
     homeDiv.classList.add("left-board-header")
     homeButton.textContent = 'Home'
-    homeButton.classList.add('home-button')
-    homeButton.addEventListener("click", updateHomePage)
+    homeDiv.innerHTML = `<img src= ${HomeIcon} />`
+    homeDiv.classList.add('home-button')
+    homeDiv.addEventListener("click", updateHomePage)
     homeDiv.appendChild(homeButton)
     return homeDiv
 }

@@ -4,7 +4,8 @@ import {openTaskModal} from "./createTaskModal.js"
 import { openModal } from "./statusModal.js"
 import { createEditTaskModal, openEditTaskModal } from "./editTask.js"
 import { createDeleteStatusModal, openDeleteStatusModal } from "./deletestatusmodal.js"
-
+import deleteIcon from "./img/trash-2.svg"
+import addIcon from "./img/plus-square.svg"
 // status column handler
 // create status columns and create new button
 function statusHandler(boardName) {
@@ -81,9 +82,13 @@ function createStatusContainerTitle(name) {
 
 // create button to remove status from board object in master list and refresh screen
 function createDeleteStatusButton(status, board) {
-    const deleteStatus = document.createElement('button')
+    const deleteStatus = document.createElement('div')
+    const caption = document.createElement('p')
+    caption.textContent = "Delete Status"
+    caption.classList.add('delete-status-caption')
     deleteStatus.classList.add('delete-status-button')
-    deleteStatus.textContent = 'Remove Status'
+    deleteStatus.innerHTML = `<img class= 'status-trash' src= ${deleteIcon} />`
+    deleteStatus.appendChild(caption)
     deleteStatus.addEventListener("click", function(){   
         createDeleteStatusModal(board['name'])
         openDeleteStatusModal(status)
@@ -100,9 +105,16 @@ function deleteStatusButtonFunction(status, board) {
 
 // Create button to open modal for creating a task
 function taskCreationButton(status) {
-    const createTaskButton = document.createElement('button')
+    const createTaskButton = document.createElement('div')
     createTaskButton.classList.add('create-task-button')
-    createTaskButton.textContent = 'Add New Task'
+    createTaskButton.innerHTML = `<img class= 'addIcon' src= ${addIcon} />`
+    const caption = document.createElement('p')
+    caption.textContent = "Create Task"
+    caption.classList.add('create-task-caption')
+    
+    
+    createTaskButton.appendChild(caption)
+    
     createTaskButton.addEventListener("click", function(){
         openTaskModal(status)
     })
@@ -112,20 +124,34 @@ function taskCreationButton(status) {
 // create and fill status container
 function createStatus(name, board) {
     const statusContainer = createStatusContainer(name)
-
-    statusContainer.appendChild(createStatusContainerTitle(name))
-    statusContainer.appendChild(taskCreationButton(name))
-    statusContainer.appendChild(taskCardListByStatus(board, name))
-    statusContainer.appendChild(createDeleteStatusButton(name, board))
+    const statusHeader = document.createElement('div')
+    statusHeader.classList.add('status-header')
+    const statusButtons = document.createElement('div')
+    statusButtons.classList.add('status-header-buttons')
+    statusHeader.appendChild(createStatusContainerTitle(name))
+    statusButtons.appendChild(createDeleteStatusButton(name, board))
+    statusButtons.appendChild(taskCreationButton(name))
+    statusHeader.appendChild(statusButtons)
+    statusContainer.appendChild(statusHeader)
+    const taskCollection = document.createElement('div')
+    taskCollection.classList.add('task-collection')
+    taskCollection.appendChild(taskCardListByStatus(board, name))
+    statusContainer.appendChild(taskCollection)
     
     return statusContainer
 }
 
 // create button for making new status and adding to board
 function statusCreationButton() {
-    const createStatusButton = document.createElement('button')
+    const createStatusButton = document.createElement('div')
     createStatusButton.classList.add('create-status-button')
-    createStatusButton.textContent = 'Add New Status'
+    createStatusButton.innerHTML = `<img class= 'addIcon' src= ${addIcon} />`
+    const caption = document.createElement('p')
+    caption.textContent = "Create Status"
+    caption.classList.add('create-status-caption')
+    
+    
+    createStatusButton.appendChild(caption)
     createStatusButton.addEventListener("click", function(){
         openModal()
     })
@@ -198,9 +224,12 @@ function createTaskDeadline(task) {
 
 // create delete button for task card
 function createDeleteTaskButton(task, board) {
-    const deleteTaskbutton = document.createElement('button')
+    const deleteTaskbutton = document.createElement('div')
     deleteTaskbutton.classList.add('delete-task')
-    deleteTaskbutton.textContent = 'Remove Task'
+    
+    deleteTaskbutton.classList.add('delete-status-button')
+    deleteTaskbutton.innerHTML = `<img class= 'task-trash' src= ${deleteIcon} />`
+    
     deleteTaskbutton.addEventListener("click", function(event) {
         event.stopPropagation()
         deleteTaskButtonFunction(task, board)

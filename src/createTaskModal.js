@@ -41,10 +41,10 @@ function createFormInput() {
     taskInputDiv.classList.add("create-task-input")
 
     taskInputDiv.appendChild(createTextFormInput('Task-Name', "Task:"))
-    taskInputDiv.appendChild(createTextFormInput('Task-Description', "Description:"))
+    taskInputDiv.appendChild(createTextAreaFormInput('Task-Description', "Description:"))
     taskInputDiv.appendChild(createDateFormInput('Task-Deadline', "Deadline:"))
     taskInputDiv.appendChild(createPriorityRadioFormInput())
-    taskInputDiv.appendChild(createTextFormInput('Task-Notes', "Note:"))
+    taskInputDiv.appendChild(createTextAreaFormInput('Task-Notes', "Note:"))
     
     return taskInputDiv}
 
@@ -62,6 +62,22 @@ function createTextFormInput(formLabel, userPrompt) {
   formDiv.appendChild(createInput)
   return formDiv
 }
+
+function createTextAreaFormInput(formLabel, userPrompt) {
+    const createLabel = document.createElement('label')
+    createLabel.setAttribute("for", formLabel)
+    createLabel.textContent = userPrompt
+    const createInput = document.createElement('input')
+    createInput.setAttribute("type", "textarea")
+    createInput.setAttribute("name", formLabel)
+    createInput.setAttribute("rows", 3)
+    createInput.setAttribute("cols", 40)
+    createInput.id = formLabel
+    const formDiv = document.createElement('div')
+    formDiv.appendChild(createLabel)
+    formDiv.appendChild(createInput)
+    return formDiv
+  }
 
 // template for date inputs
 function createDateFormInput(formLabel, userPrompt) {
@@ -81,7 +97,7 @@ function createDateFormInput(formLabel, userPrompt) {
 // priority radio buttons
 function createPriorityRadioFormInput() {
   const createFieldset = document.createElement('fieldset')
-  const createLegend = document.createElement('legened')
+  const createLegend = document.createElement('legend')
   createLegend.textContent = "Select Task Priority"
   createFieldset.appendChild(createLegend)
 
@@ -89,11 +105,11 @@ function createPriorityRadioFormInput() {
   const createInput1 = document.createElement('input')
   createInput1.setAttribute("type", "radio")
   createInput1.setAttribute("name", "priority")
-  createInput1.setAttribute('value', "High Priority")
+  createInput1.setAttribute('value', "High")
   createInput1.id = "highPriority"
   const createLabel1 = document.createElement('label')
   createLabel1.setAttribute("for", 'highPriority')
-  createLabel1.textContent = 'High Priority'
+  createLabel1.textContent = 'High'
   createRadioOne.appendChild(createInput1)
   createRadioOne.appendChild(createLabel1)
 
@@ -101,26 +117,26 @@ function createPriorityRadioFormInput() {
   const createInput2 = document.createElement('input')
   createInput2.setAttribute("type", "radio")
   createInput2.setAttribute("name", "priority")
-  createInput2.setAttribute('value', "Medium Priority")
+  createInput2.setAttribute('value', "Medium")
   createInput2.id = "mediumPriority"
   const createLabel2 = document.createElement('label')
   createLabel2.setAttribute("for", 'mediumPriority')
-  createLabel2.textContent = 'Medium Priority'
-  createRadioOne.appendChild(createInput2)
-  createRadioOne.appendChild(createLabel2)
+  createLabel2.textContent = 'Medium'
+  createRadioTwo.appendChild(createInput2)
+  createRadioTwo.appendChild(createLabel2)
 
   const createRadioThree = document.createElement('div')
   const createInput3 = document.createElement('input')
   createInput3.setAttribute("type", "radio")
   createInput3.setAttribute("name", "priority")
-  createInput3.setAttribute('value', "Low Priority")
+  createInput3.setAttribute('value', "Low")
   createInput3.id = "lowPriority"
   createInput3.setAttribute('checked', true)
   const createLabel3 = document.createElement('label')
   createLabel3.setAttribute("for", 'lowPriority')
-  createLabel3.textContent = 'Low Priority'
-  createRadioOne.appendChild(createInput3)
-  createRadioOne.appendChild(createLabel3)
+  createLabel3.textContent = 'Low'
+  createRadioThree.appendChild(createInput3)
+  createRadioThree.appendChild(createLabel3)
 
 
 

@@ -15,6 +15,15 @@ function makeBoardFormElement() {
     return createBoardForm
 }
 
+function createModalTitle(){
+    
+    const title = document.createElement('h2')
+    title.textContent = "Create New Board"
+    title.classList.add('modal-title')
+    
+    return title
+}
+
 function createExitButton()  {
     const exitButton = document.createElement('button')
     exitButton.classList.add("exit-button")
@@ -61,12 +70,10 @@ function createModalSubmitButton() {
 
 function fullForm() {
     const form = makeBoardFormElement()
-    const exit = createExitButton()
-    const input = createFormInput()
-    const submit = createModalSubmitButton()
-    form.appendChild(exit)
-    form.appendChild(input)
-    form.appendChild(submit)
+    form.appendChild(createExitButton())
+    form.appendChild(createModalTitle())
+    form.appendChild(createFormInput())
+    form.appendChild(createModalSubmitButton())
     return form
 }
 

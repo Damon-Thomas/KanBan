@@ -17,9 +17,12 @@ function homeContent() {
     homeDivContent.classList.add('content-content')
     const homeDiv = document.createElement('div')
     homeDiv.classList.add("content")
-    homeDiv.appendChild(makeBoardButton())
-
-    addMasterBoard(homeDivContent)
+    const makeBoardDiv = document.createElement('div')
+    makeBoardDiv.classList.add('board-header-container')
+    makeBoardDiv.appendChild(makeBoardButton())
+    addMasterBoard(makeBoardDiv)
+    homeDivContent.appendChild(makeBoardDiv)
+    
     homeDivContent.appendChild(createBoardModal())
     addBoards(homeDivContent)
     homeDiv.appendChild(homeDivContent)
