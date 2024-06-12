@@ -50,4 +50,4 @@ function boardTitle(boardName){
     return title
 }
 
-export {boardContent, boardHeader}
+export {boardContent, boardHeader, returnHome}

@@ -40,7 +40,7 @@ function createFormInput() {
     const taskInputDiv = document.createElement('div')
     taskInputDiv.classList.add("create-task-input")
 
-    taskInputDiv.appendChild(createTextFormInput('Task-Name', "Task:"))
+    taskInputDiv.appendChild(createTextFormInput('Task-Name', "Task*:"))
     taskInputDiv.appendChild(createTextAreaFormInput('Task-Description', "Description:"))
     taskInputDiv.appendChild(createDateFormInput('Task-Deadline', "Deadline:"))
     taskInputDiv.appendChild(createPriorityRadioFormInput())
@@ -55,6 +55,9 @@ function createTextFormInput(formLabel, userPrompt) {
   createLabel.textContent = userPrompt
   const createInput = document.createElement('input')
   createInput.setAttribute("type", "text")
+  createInput.required = true
+  createInput.setAttribute("minlength", "1")
+  createInput.setAttribute("maxlength", "25")
   createInput.setAttribute("name", formLabel)
   createInput.id = formLabel
   const formDiv = document.createElement('div')
@@ -162,12 +165,15 @@ function createModalSubmitButton(boardName) {
 
     // use submit button to create task object below
     submitTask.addEventListener("click", function(event) {
-        
+         
         event.preventDefault();
 
 
-        const taskNameInput = document.querySelector('#Task-Name').value
-        
+        const taskNameInput = document.querySelector('#Task-Name')
+        if (taskNameInput.value === "") {
+            taskNameInput.classList.add('required')
+            return
+        }
         const descriptionInput = document.querySelector("#Task-Description").value
         const deadlineInput = document.querySelector("#Task-Deadline").value
         const priority = document.querySelector('input[name="priority"]:checked').value;
@@ -177,7 +183,7 @@ function createModalSubmitButton(boardName) {
         const statusActive = dialog.dataset.selectedStatus
         
         
-        const task = new Task(taskNameInput, descriptionInput, deadlineInput, priority, noteInput, statusActive)
+        const task = new Task(taskNameInput.value, descriptionInput, deadlineInput, priority, noteInput, statusActive)
         closeModal()
         addTaskToBoard(boardName, task)
         updateBoardPage(boardName)

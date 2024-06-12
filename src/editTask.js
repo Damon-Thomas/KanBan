@@ -53,6 +53,7 @@ function createFormInput(task) {
 function noLabelInput(formLabel, taskValue) {
   const createInput = document.createElement('input')
   createInput.setAttribute("type", "text")
+  createInput.setAttribute("maxlength", "25")
   createInput.setAttribute("name", formLabel)
   createInput.id = formLabel
   createInput.value = taskValue
@@ -193,8 +194,12 @@ function createModalSubmitButton(boardName, task) {
         event.preventDefault();
 
 
-        const taskNameInput = document.querySelector('#Edit-Task-Name').value
         
+        const taskNameInput = document.querySelector('#Edit-Task-Name')
+        if (taskNameInput.value === "") {
+            taskNameInput.classList.add('required')
+            return
+        }
         const descriptionInput = document.querySelector("#Edit-Task-Description").value
         const deadlineInput = document.querySelector("#Edit-Task-Deadline").value
         const priority = document.querySelector('input[name="edit-priority"]:checked').value;
@@ -204,10 +209,11 @@ function createModalSubmitButton(boardName, task) {
         const statusActive = dialog.dataset.selectedStatus
         
         
-        const newtask = new Task(taskNameInput, descriptionInput, deadlineInput, priority, noteInput, statusActive)
+        const newtask = new Task(taskNameInput.value, descriptionInput, deadlineInput, priority, noteInput, statusActive)
         replaceTask(task, newtask, boardName)
         closeModal(boardName, task)
         console.log(document.getElementById('master-board-title'))
+        
         if (document.getElementById('master-board-title') === null) {
           updateBoardPage(boardName)
         }
@@ -257,12 +263,18 @@ function closeModal(boardName, task) {
     dialog.close();
     form.innerHTML = ""
     form.appendChild(fullForm(boardName, task))
-    // updateScreen(boardName)
+    updateScreen(boardName)
     
 }
 
 function updateScreen(boardName) {
-  updateBoardPage(boardName)
+  if (document.getElementById('master-board-title') === null) {
+    updateBoardPage(boardName)
+  }
+  else {
+    updateMasterBoardPage()
+  }
+  
 }
 
 // exporting created dialog and open controller

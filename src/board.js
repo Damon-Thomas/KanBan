@@ -1,9 +1,18 @@
 // master board handling
-// 
+// '2024-05-15'
 // master board list and 2 premade boards
 const boards = []
 createBoard("My Coding Journey")
 createBoard("House Maintanence this year")
+addTaskToBoard('My Coding Journey', new Task('TODO project', 'Complete a todo list using all the skills you have learned so far', '2024-06-15', 'High', 'Do a Kanban variation of the project', 'In Progress'))
+addTaskToBoard('My Coding Journey', new Task('Library Project', 'Complete a library using all the skills you have learned so far', '2024-06-09', 'High', 'add filter functionality', 'Done'))
+addTaskToBoard('My Coding Journey', new Task('Tic Tac Toe', 'Complete a Tic Tac Toe Project using JavaScript', '2024-06-12', 'High', 'Make it simple but look nice', 'Done'))
+addTaskToBoard('My Coding Journey', new Task('My Website', 'Make a personal website using all your skills that shows off your completed projects', '2024-12-31', 'High', 'Take your time and make it perfect', 'ToDo'))
+addTaskToBoard('My Coding Journey', new Task('Admin Dashboard Thing', 'From The Odin Project', '', 'High', '', 'Done'))
+addTaskToBoard('My Coding Journey', new Task('Sign Up form', 'From The Odin Project', '', 'High', '', 'Done'))
+addTaskToBoard('House Maintanence this year', new Task('Seal Driveway', 'Cleane and seal driveway', '2024-08-15', 'Medium', 'Use CT gift cards', 'ToDo'))
+addTaskToBoard('House Maintanence this year', new Task('Replace A/C', 'Replace Broken Air Conditioner', '2024-06-01', 'High', 'PAID', 'Done'))
+addTaskToBoard('House Maintanence this year', new Task('Powerwash', 'Clean outdoor surfaces', '2024-06-30', 'Medium', 'Stain Deck soon after', 'ToDo'))
 
 // create new board object - statuses array has 3 premade inputs
 function createBoard(boardname) {
@@ -98,6 +107,7 @@ function Task(title, description, deadline, priority, notes, status) {
     this.notes = notes
     this.status = status
     }
+
 
 
 

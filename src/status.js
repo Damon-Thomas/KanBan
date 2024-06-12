@@ -18,11 +18,11 @@ function statusHandler(boardName) {
 }
 
 function masterHandler() {
-    console.log('handler')
+    
     const taskCollection = createMasterTaskCollection()
-    console.log(taskCollection)
+    
     fillTaskCollection(taskCollection)
-    console.log(taskCollection)
+    
     return taskCollection
 }
 
@@ -37,6 +37,7 @@ function fillTaskCollection(taskCollection){
         }
     }
 }
+
 
 function createMasterTaskCollection() {
     const taskCollection = document.createElement('div')
@@ -67,6 +68,10 @@ function fillStatusCollection(statusCollection, boardName){
             }
         }
         }
+}
+
+function fillMasterTaskCollection() {
+    return
 }
 
 // create status column with name set as dataset
@@ -190,9 +195,19 @@ function taskCardCreater(task, board) {
     taskDiv.appendChild(createTaskDeadline(task))
     taskDiv.appendChild(createDeleteTaskButton(task, board))
 
-    taskDiv.addEventListener("click", function(event) {
-        const container = document.querySelector(".board-content")
+    taskDiv.addEventListener("click", function() {
+        let container
+        const verifyBoard = document.querySelector('.board-title')
+        console.log('verify',verifyBoard.value)
+        if (document.querySelector('#master-board-title')) {
+            container = document.querySelector(".master-board-content")
+        }
+        else {
+            container = document.querySelector(".board-content")
+        }
+        
         const dialog = createEditTaskModal(board.name, task)
+       
         container.appendChild(dialog)
         openEditTaskModal(task.status)
        
@@ -222,7 +237,7 @@ function createTaskDeadline(task) {
     const taskDeadline = document.createElement('p')
     taskDeadline.classList.add('task-deadline')
     if (task.deadline != "") {
-    taskDeadline.textContent = `Deadline: ${task.deadline}`}
+    taskDeadline.textContent = `Due: ${task.deadline}`}
     return taskDeadline
 }
 

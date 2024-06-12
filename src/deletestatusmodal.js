@@ -1,4 +1,4 @@
-
+import CloseIcon from "./img/Cancel-Button.svg"
 import { findBoardFromBoardName } from "./board.js"
 import { deleteStatusButtonFunction } from "./status.js"
 
@@ -21,7 +21,7 @@ function createExitButton()  {
     const exitButton = document.createElement('button')
     exitButton.classList.add("exit-button")
     exitButton.setAttribute("type", "button")
-    exitButton.textContent = `Cancel`
+    exitButton.innerHTML = `<img src= ${CloseIcon} />`
     exitButton.setAttribute("name", "exit")
     exitButton.id = 'status-close-delete-modal'
     exitButton.addEventListener("click", function(event) {
@@ -30,6 +30,7 @@ function createExitButton()  {
     })
     return exitButton
 } 
+
 
 // Create your task object form below
 function createFormInput() {

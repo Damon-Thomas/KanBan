@@ -3,6 +3,7 @@ import {masterHandler, statusHandler} from "./status.js"
 import { updateHomePage } from "./index.js";
 import {createTaskModal} from "./createTaskModal.js"
 import { createDeleteStatusModal } from "./deletestatusmodal.js";
+import { returnHome } from "./boardpage.js";
 
 // header containing home button and board title
 function MasterBoardHeader() {
@@ -28,16 +29,16 @@ function masterBoardContent() {
 }
 
 // load homepage
-function returnHome(){
-    const homeButton = document.createElement('button')
-    const homeDiv = document.createElement('div')
-    homeDiv.classList.add("left-board-header")
-    homeButton.textContent = 'Home'
-    homeButton.classList.add('home-button')
-    homeButton.addEventListener("click", updateHomePage)
-    homeDiv.appendChild(homeButton)
-    return homeDiv
-}
+// function returnHome(){
+//     const homeButton = document.createElement('button')
+//     const homeDiv = document.createElement('div')
+//     homeDiv.classList.add("left-board-header")
+//     homeButton.textContent = 'Home'
+//     homeButton.classList.add('home-button')
+//     homeButton.addEventListener("click", updateHomePage)
+//     homeDiv.appendChild(homeButton)
+//     return homeDiv
+// }
 
 // create board title heading
 function masterBoardTitle(){
