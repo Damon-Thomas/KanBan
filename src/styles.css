@@ -56,7 +56,7 @@ body {
 }
 
 .main {
-    max-height: 100%; 
+    height: 100%; 
     
     
     
@@ -106,7 +106,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 17.5rem;
+    height: 20rem;
     overflow: auto;
     scrollbar-gutter: stable;
 
@@ -123,10 +123,7 @@ body {
 }
 .footer {
     background-color: var(--light-grey);
-    
-    
     width: 100vw;
-    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,7 +131,6 @@ body {
 .main-title {
     font-size: 3rem;
     font-weight: 900;
-    
     
 }
 
@@ -150,14 +146,15 @@ body {
 .status-container {
     display: flex;
     gap: 1rem;
-    /* padding: 2rem; */
     height: 100%;
+    background-color: var(--back-ground);
 
-    
 }
 
 .status-column {
-    max-height: 95%;
+    max-height: 80vh;
+    overflow: hidden;
+
 }
 
 .board-header {
@@ -190,7 +187,7 @@ body {
 }
 
 .board-content {
-    height: 100%;
+    max-height: 80vh;
 }
 .board-card-title {
     font-size: 1.5rem;
@@ -276,7 +273,7 @@ background: linear-gradient(0deg, var(--dark-overlay) 80%, var(--accent) 80%);
 }
 
 #form {
-    padding-top: 15%;
+    padding-top: 12%;
 }
 
 #form, #task-form, #status-form, #edittask-form {
@@ -286,6 +283,10 @@ background: linear-gradient(0deg, var(--dark-overlay) 80%, var(--accent) 80%);
     gap: 1rem;
     justify-content: space-around;
 }
+
+#status-form {
+    padding-top: 1rem;
+}
 .create-board-input, .create-task-input, .create-status-input, .edit-task-input {
     display: flex;
     flex-direction: column;
@@ -293,21 +294,32 @@ background: linear-gradient(0deg, var(--dark-overlay) 80%, var(--accent) 80%);
     
 }
 
+.create-status-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-status-button > .addIcon {
+    width: 4rem;
+    height: 4rem;
+}
+
 #create-task{
     background: var(--dark-overlay);
     background: linear-gradient(0deg, var(--dark-overlay) 90%, var(--accent) 90%);
-    padding: 8% 1rem 1rem 1rem;
+    padding: 4rem 1rem 1rem 1rem;
 }
 
 #task-close-modal {
-    top: .25rem
+    top: .5rem
 
 }
 
-textarea {
-    height: auto !important;
-    max-width: 15rem;
-}
+/* textarea {
+    
+    
+} */
 .edit-task-input {
     gap: 1.25rem;
 }
@@ -315,7 +327,7 @@ textarea {
 #edit-task {
     background: var(--dark-overlay);
     background: linear-gradient(0deg, var(--dark-overlay) 90%, var(--accent) 90%);
-    padding: 8% 1rem 1rem 1rem;
+    padding: 4rem 1rem 1rem 1rem;
 }
 
 /* #Edit-Task-Notes {
@@ -364,7 +376,7 @@ textarea {
     justify-content: center;
     background-color: var(--accent);
     position: absolute;
-    top: 5%;
+    top: 3%;
     right: 1rem;
     border: none;
     
@@ -388,7 +400,7 @@ input {
     /* box-shadow: 0 0 1px white; */
     margin: 0;
     padding-left: .25rem;
-    /* height: 1.5rem; */
+    height: 1.5rem;
 }
 
 input[type="radio"] {
@@ -446,12 +458,6 @@ fieldset > div > input {
 .status-container {
     padding: 0 1rem;
     max-height: 95%;
-}
-
-.task-collection {
-    max-height: 100%;
-    overflow-y: auto;
-    scrollbar-color: var(--accent) var(--back-ground);
     
 }
 
@@ -460,38 +466,66 @@ fieldset > div > input {
     width: 12rem;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    /* display: flex;
+    flex-direction: column; */
     align-items: center;
-    max-height: 100%;
+    max-height: 80vh;
+    overflow: hidden;
     
     
-    padding: 1rem;
-    gap: 1rem;
+    
+    
+    /* gap: 1rem; */
 }
 
 .status-header{
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: start;
-    width: 100%;
+    width: 10rem;
     height: 3rem;
+    background-color: var(--dark-overlay);
+    box-shadow: 0px 2px 4px var(--back-ground);
+}
+
+.task-collection {
+    height: calc(80vh - 8rem);
+    width: 11rem;
+    padding: 1rem .5rem;
+    
 }
 
 .task-card-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
-    padding: .5rem;
+    
+    width: 100%;
+    height: 100%;
+    /* scrollbar-gutter: static; */
+    overflow-y: auto;
+    scrollbar-color: var(--accent) var(--back-ground);
+    
+    
     
 }
 .task-container {
     background-color: var(--dark-overlay);
-    width: 10rem;
+    flex-shrink: 0;
+    width: 9rem;
     height: 6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: .5rem;
+    border-radius: 16px;
+    box-shadow: 2px 2px 4px var(--back-ground);
+   
+
 
 }
 
@@ -525,6 +559,23 @@ fieldset > div > input {
 .delete-status-caption, .create-task-caption {
     font-size: .5rem;
     width: 1.5rem;
+}
+
+.master-task-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+.master-board-content {
+    height: calc(80vh - 2rem);
+    
+    padding: 1rem;
 }
 
 ::backdrop{

@@ -19,7 +19,7 @@ function statusHandler(boardName) {
 
 function masterHandler() {
     console.log('handler')
-    const taskCollection = createTaskCollection()
+    const taskCollection = createMasterTaskCollection()
     console.log(taskCollection)
     fillTaskCollection(taskCollection)
     console.log(taskCollection)
@@ -38,7 +38,11 @@ function fillTaskCollection(taskCollection){
     }
 }
 
-
+function createMasterTaskCollection() {
+    const taskCollection = document.createElement('div')
+    taskCollection.classList.add('master-task-container')
+    return taskCollection
+}
 
 function createTaskCollection() {
     const taskCollection = document.createElement('div')

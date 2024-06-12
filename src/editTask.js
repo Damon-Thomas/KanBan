@@ -82,8 +82,8 @@ function createTextAreaFormInput(formLabel, userPrompt, taskValue) {
   const createLabel = document.createElement('label')
   createLabel.setAttribute("for", formLabel)
   createLabel.textContent = userPrompt
-  const createInput = document.createElement('input')
-  createInput.setAttribute("type", "textarea")
+  const createInput = document.createElement('textarea')
+  createInput.setAttribute("type", "text")
   createInput.setAttribute("name", formLabel)
   createInput.setAttribute("rows", 3)
   createInput.setAttribute("cols", 40)

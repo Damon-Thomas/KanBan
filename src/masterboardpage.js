@@ -20,7 +20,7 @@ function MasterBoardHeader() {
 // create content div and add - status div + status modal + task modal
 function masterBoardContent() {
     const boardDiv = document.createElement('div')
-    boardDiv.classList.add("board-content")
+    boardDiv.classList.add("master-board-content")
     boardDiv.appendChild(masterHandler())
     
     
