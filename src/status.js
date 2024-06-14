@@ -1,11 +1,14 @@
 import {boards, removeStatus, deleteTask, deleteAllTasksWithStatus} from "./board.js"
-import { updateBoardPage } from './index.js'
+import { updateBoardPage, updateMasterBoardPage } from './index.js'
 import {openTaskModal} from "./createTaskModal.js"
 import { openModal } from "./statusModal.js"
 import { createEditTaskModal, openEditTaskModal } from "./editTask.js"
 import { createDeleteStatusModal, openDeleteStatusModal } from "./deletestatusmodal.js"
 import deleteIcon from "./img/trash-2.svg"
 import addIcon from "./img/plus-square.svg"
+import { createDate } from "./board.js"
+import { format, compareAsc } from "date-fns";
+// import { dateFilter } from "./masterboardpage.js"
 // status column handler
 // create status columns and create new button
 function statusHandler(boardName) {
@@ -27,12 +30,11 @@ function masterHandler() {
 }
 
 function fillTaskCollection(taskCollection){
-    console.log('fill')
+    
     for (let i in boards) {
-        console.log('in1')
+        
         for (let x in boards[i]['tasks']){
-            console.log(boards[i]['tasks'][x])
-            console.log(boards[i])
+            
             taskCollection.appendChild(taskCardCreater(boards[i]['tasks'][x], boards[i]))
         }
     }
@@ -187,6 +189,8 @@ function taskCardListByStatus(board, status) {
     return cardContainer
 }
 
+
+
 // create task card handler
 function taskCardCreater(task, board) {
     
@@ -194,11 +198,11 @@ function taskCardCreater(task, board) {
     taskDiv.appendChild(createTaskTitle(task))
     taskDiv.appendChild(createTaskDeadline(task))
     taskDiv.appendChild(createDeleteTaskButton(task, board))
-
+    
     taskDiv.addEventListener("click", function() {
         let container
-        const verifyBoard = document.querySelector('.board-title')
-        console.log('verify',verifyBoard.value)
+        // dateFilter()
+        
         if (document.querySelector('#master-board-title')) {
             container = document.querySelector(".master-board-content")
         }
@@ -236,8 +240,15 @@ function createTaskTitle(task) {
 function createTaskDeadline(task) {
     const taskDeadline = document.createElement('p')
     taskDeadline.classList.add('task-deadline')
+    let dateHandler = task.deadline
     if (task.deadline != "") {
-    taskDeadline.textContent = `Due: ${task.deadline}`}
+        for (let i = 0; i < 2; i++) {
+          
+            dateHandler = dateHandler.replace('-', ', ')
+            dateHandler = dateHandler.replace(' 0', ' ')
+        }
+    
+    taskDeadline.textContent = `Due: ${createDate(dateHandler)}`}
     return taskDeadline
 }
 
@@ -258,8 +269,14 @@ function createDeleteTaskButton(task, board) {
 
 // task card delete button functionality
 function deleteTaskButtonFunction(task, board) {
+    
     deleteTask(task, board)
-    updateBoardPage(board['name'])
+    if (document.getElementById('master-board-title') === null) {
+        updateBoardPage(board['name'])
+      }
+      else {
+        updateMasterBoardPage()
+      }
 }
 
 // 
@@ -275,4 +292,4 @@ function deleteTaskButtonFunction(task, board) {
 
 
 
-export {statusHandler, deleteStatusButtonFunction, masterHandler}
+export {statusHandler, deleteStatusButtonFunction, masterHandler, taskCardCreater}

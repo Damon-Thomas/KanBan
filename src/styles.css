@@ -171,7 +171,12 @@ body {
 }
 
 .left-board-header, .right-board-header {
-    width: 10rem;
+    width: 15rem;
+}
+
+.left-board-header {
+    display: flex;
+    gap: 3rem;
 }
 
 .createboard {
@@ -316,8 +321,10 @@ background: linear-gradient(0deg, var(--dark-overlay) 80%, var(--accent) 80%);
     border: none;
     background-color: var(--warning);
     color: var(--white);
-    width: clamp(5rem, 8rem, 12rem);
+    width: clamp(5rem, 10rem, 14rem);
+    height: 2.5rem;
     box-shadow: 2px 2px 4px var(--back-ground);
+    font-size: 1.5rem;
 }
 
 #status-form {
@@ -550,7 +557,7 @@ fieldset > div > input {
 .task-container {
     
     background: var(--dark-overlay);
-    background: linear-gradient(0deg, var(--dark-overlay) 90%, var(--accent) 90%);
+    background: linear-gradient(0deg, rgb(223, 222, 222) 90%, var(--accent) 90%);
     flex-shrink: 0;
     width: 9rem;
     height: 6rem;
@@ -562,7 +569,7 @@ fieldset > div > input {
     align-items: center;
     padding: .5rem;
     border-radius: 16px;
-    box-shadow: 2px 2px 4px var(--back-ground);
+    box-shadow: 2px 2px 4px black;
     margin: 8px 8px 8px 8px;
     text-overflow: ellipsis;
 }
@@ -570,12 +577,14 @@ fieldset > div > input {
 .task-deadline{
     font-size: .75rem;
     height: .9rem;
+    color: var(--back-ground);
 }
 .task-title {
     height: 2.2rem;
     font-size: 1rem;
     font-weight: 800;
     line-height: 1.1;
+    color: var(--back-ground);
     
 }
 

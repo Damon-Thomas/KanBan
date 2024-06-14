@@ -2,6 +2,8 @@ import CloseIcon from "./img/Cancel-Button.svg"
 import { updateBoardPage } from "./index.js"
 import { addTaskToBoard } from "./board.js"
 import { Task } from "./board.js";
+import { format, compareAsc } from "date-fns";
+import { createDate } from "./board.js";
 
 
 // make dialog to control form as modal
@@ -176,6 +178,12 @@ function createModalSubmitButton(boardName) {
         }
         const descriptionInput = document.querySelector("#Task-Description").value
         const deadlineInput = document.querySelector("#Task-Deadline").value
+        
+
+        
+
+        
+
         const priority = document.querySelector('input[name="priority"]:checked').value;
         
         const noteInput = document.querySelector("#Task-Notes").value

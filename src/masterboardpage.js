@@ -1,9 +1,13 @@
 import { createStatusModal } from "./statusModal.js";
 import {masterHandler, statusHandler} from "./status.js"
-import { updateHomePage } from "./index.js";
+import { updateHomePage, updateMasterBoardPage } from "./index.js";
 import {createTaskModal} from "./createTaskModal.js"
 import { createDeleteStatusModal } from "./deletestatusmodal.js";
 import { returnHome } from "./boardpage.js";
+import calender from "./img/calendar.svg"
+import upArrow from "./img/arrow-up.svg"
+import downArrow from "./img/arrow-down.svg"
+import { ascendingDomHandler, descendingDomHandler } from "./dateHandler.js";
 
 // header containing home button and board title
 function MasterBoardHeader() {
@@ -12,7 +16,11 @@ function MasterBoardHeader() {
     
     const emptyDiv = document.createElement('div')
     emptyDiv.classList.add("right-board-header")
-    headerDiv.appendChild(returnHome())
+    const headerLeft = document.createElement('div')
+    headerLeft.classList.add("left-board-header")
+    headerLeft.appendChild(returnHome())
+    headerLeft.appendChild(masterBoardDateSort())
+    headerDiv.appendChild(headerLeft)
     headerDiv.appendChild(masterBoardTitle())
     headerDiv.appendChild(emptyDiv)
     return headerDiv;
@@ -28,17 +36,14 @@ function masterBoardContent() {
     return boardDiv
 }
 
-// load homepage
-// function returnHome(){
-//     const homeButton = document.createElement('button')
-//     const homeDiv = document.createElement('div')
-//     homeDiv.classList.add("left-board-header")
-//     homeButton.textContent = 'Home'
-//     homeButton.classList.add('home-button')
-//     homeButton.addEventListener("click", updateHomePage)
-//     homeDiv.appendChild(homeButton)
-//     return homeDiv
-// }
+// function dateFilter() {
+//     const parent = document.querySelector('.master-task-container')
+//     let list = parent.children
+//     console.log(list)
+//     for (let x = 0; x < list.length; x++){
+//         console.log(list[x].children[1].textContent)
+    
+//     }}
 
 // create board title heading
 function masterBoardTitle(){
@@ -47,6 +52,29 @@ function masterBoardTitle(){
     title.classList.add('board-title');
     title.id = "master-board-title"
     return title
+}
+
+function masterBoardDateSort() {
+    const dateSort = document.createElement('div')
+    dateSort.classList.add('date-sort')
+    dateSort.classList.add('default')
+    dateSort.innerHTML = `<img src= ${calender} />`
+    dateSort.addEventListener("click", function() {
+        if (dateSort.classList.contains('default')) {
+            dateSort.innerHTML = `<img src= ${calender} /><img src= ${upArrow} /> `
+            dateSort.classList.replace('default', 'ascending')
+            ascendingDomHandler()
+        }
+        else if (dateSort.classList.contains('ascending')) {
+            dateSort.innerHTML = `<img src= ${calender} /><img src= ${downArrow} /> `
+            dateSort.classList.replace('ascending', 'descending')
+            descendingDomHandler()
+        }
+        else {
+            updateMasterBoardPage()
+        }
+    })
+    return dateSort
 }
 
 export {masterBoardContent, MasterBoardHeader}

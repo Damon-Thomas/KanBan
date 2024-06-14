@@ -3,6 +3,7 @@ import { updateBoardPage, updateMasterBoardPage } from "./index.js"
 import { addTaskToBoard } from "./board.js"
 import { Task } from "./board.js";
 import { replaceTask } from "./board.js";
+import { createDate } from "./board.js";
 
 
 // make dialog to control form as modal
@@ -202,6 +203,9 @@ function createModalSubmitButton(boardName, task) {
         }
         const descriptionInput = document.querySelector("#Edit-Task-Description").value
         const deadlineInput = document.querySelector("#Edit-Task-Deadline").value
+
+      
+
         const priority = document.querySelector('input[name="edit-priority"]:checked').value;
         
         const noteInput = document.querySelector("#Edit-Task-Notes").value
@@ -212,7 +216,7 @@ function createModalSubmitButton(boardName, task) {
         const newtask = new Task(taskNameInput.value, descriptionInput, deadlineInput, priority, noteInput, statusActive)
         replaceTask(task, newtask, boardName)
         closeModal(boardName, task)
-        console.log(document.getElementById('master-board-title'))
+        
         
         if (document.getElementById('master-board-title') === null) {
           updateBoardPage(boardName)

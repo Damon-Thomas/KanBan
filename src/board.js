@@ -1,18 +1,32 @@
 // master board handling
 // '2024-05-15'
 // master board list and 2 premade boards
+import { format, compareAsc } from "date-fns";
+
+
+function createDate(date) {
+    return format(new Date(date), "PP")
+}
+
+
+
 const boards = []
 createBoard("My Coding Journey")
 createBoard("House Maintanence this year")
-addTaskToBoard('My Coding Journey', new Task('TODO project', 'Complete a todo list using all the skills you have learned so far', '2024-06-15', 'High', 'Do a Kanban variation of the project', 'In Progress'))
-addTaskToBoard('My Coding Journey', new Task('Library Project', 'Complete a library using all the skills you have learned so far', '2024-06-09', 'High', 'add filter functionality', 'Done'))
-addTaskToBoard('My Coding Journey', new Task('Tic Tac Toe', 'Complete a Tic Tac Toe Project using JavaScript', '2024-06-12', 'High', 'Make it simple but look nice', 'Done'))
-addTaskToBoard('My Coding Journey', new Task('My Website', 'Make a personal website using all your skills that shows off your completed projects', '2024-12-31', 'High', 'Take your time and make it perfect', 'ToDo'))
+addTaskToBoard('My Coding Journey', new Task('TODO project', 'Complete a todo list using all the skills you have learned so far', createDate('2024, 6, 15'), 'High', 'Do a Kanban variation of the project', 'In Progress'))
+addTaskToBoard('My Coding Journey', new Task('Library Project', 'Complete a library using all the skills you have learned so far', createDate('2024, 6, 9'), 'High', 'add filter functionality', 'Done'))
+addTaskToBoard('My Coding Journey', new Task('Tic Tac Toe', 'Complete a Tic Tac Toe Project using JavaScript', createDate('2024, 6, 12'), 'High', 'Make it simple but look nice', 'Done'))
+addTaskToBoard('My Coding Journey', new Task('My Website', 'Make a personal website using all your skills that shows off your completed projects', createDate('2024, 12, 31'), 'High', 'Take your time and make it perfect', 'ToDo'))
 addTaskToBoard('My Coding Journey', new Task('Admin Dashboard Thing', 'From The Odin Project', '', 'High', '', 'Done'))
 addTaskToBoard('My Coding Journey', new Task('Sign Up form', 'From The Odin Project', '', 'High', '', 'Done'))
-addTaskToBoard('House Maintanence this year', new Task('Seal Driveway', 'Cleane and seal driveway', '2024-08-15', 'Medium', 'Use CT gift cards', 'ToDo'))
-addTaskToBoard('House Maintanence this year', new Task('Replace A/C', 'Replace Broken Air Conditioner', '2024-06-01', 'High', 'PAID', 'Done'))
-addTaskToBoard('House Maintanence this year', new Task('Powerwash', 'Clean outdoor surfaces', '2024-06-30', 'Medium', 'Stain Deck soon after', 'ToDo'))
+addTaskToBoard('House Maintanence this year', new Task('Seal Driveway', 'Cleane and seal driveway', createDate('2024, 8, 15'), 'Medium', 'Use CT gift cards', 'ToDo'))
+addTaskToBoard('House Maintanence this year', new Task('Replace A/C', 'Replace Broken Air Conditioner', createDate('2024, 6, 1'), 'High', 'PAID', 'Done'))
+addTaskToBoard('House Maintanence this year', new Task('Powerwash', 'Clean outdoor surfaces', createDate('2024, 6, 30'), 'Medium', 'Stain Deck soon after', 'ToDo'))
+
+let stringBoard = JSON.stringify(boards)
+console.log('string', stringBoard)
+let newBoard = JSON.parse(stringBoard)
+console.log('newboard', newBoard)
 
 // create new board object - statuses array has 3 premade inputs
 function createBoard(boardname) {
@@ -47,6 +61,22 @@ function deleteBoard(board){
     let index = boards.indexOf(board)
     boards.splice(index, 1)
     
+}
+
+function dateList() {
+    const dateList = []
+    for (let i in boards) {
+        for (let x in boards['tasks']) {
+            let dateHandler = x.deadline
+            if (x.deadline != "") {
+                continue}
+            for (let p = 0; p < 2; p++) {
+          
+            dateHandler = dateHandler.replace('-', ', ')
+            dateHandler = dateHandler.replace(' 0', ' ')
+        }
+        }
+    }
 }
 
 // delete status from specified board
@@ -111,4 +141,4 @@ function Task(title, description, deadline, priority, notes, status) {
 
 
 
-export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, removeStatus, deleteTask, replaceTask, deleteAllTasksWithStatus, findBoardFromBoardName}
+export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, removeStatus, deleteTask, replaceTask, deleteAllTasksWithStatus, findBoardFromBoardName, createDate}

@@ -27,7 +27,7 @@ function deleteBoardButton(boardDiv, activeBoard) {
 // delete board button creation
 function createDeleteBoardButton(boardDiv, activeBoard) {
     const deleteboardDiv = document.createElement('button')
-    console.log(deleteIcon)
+    
     deleteboardDiv.innerHTML = `<img class= 'trash' src= ${deleteIcon} />`
     deleteboardDiv.classList.add('delete-board-button')
     

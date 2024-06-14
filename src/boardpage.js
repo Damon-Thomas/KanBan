@@ -33,7 +33,7 @@ function boardContent(boardName) {
 function returnHome(){
     const homeButton = document.createElement('p')
     const homeDiv = document.createElement('div')
-    homeDiv.classList.add("left-board-header")
+    
     homeButton.textContent = 'Home'
     homeDiv.innerHTML = `<img src= ${HomeIcon} />`
     homeDiv.classList.add('home-button')
