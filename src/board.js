@@ -1,6 +1,6 @@
 // master board handling
-// '2024-05-15'
-// master board list and 2 premade boards
+
+
 import { format, compareAsc } from "date-fns";
 
 
@@ -10,29 +10,58 @@ function createDate(date) {
 
 
 
-const boards = []
-createBoard("My Coding Journey")
-createBoard("House Maintanence this year")
-addTaskToBoard('My Coding Journey', new Task('TODO project', 'Complete a todo list using all the skills you have learned so far', createDate('2024, 6, 15'), 'High', 'Do a Kanban variation of the project', 'In Progress'))
-addTaskToBoard('My Coding Journey', new Task('Library Project', 'Complete a library using all the skills you have learned so far', createDate('2024, 6, 9'), 'High', 'add filter functionality', 'Done'))
-addTaskToBoard('My Coding Journey', new Task('Tic Tac Toe', 'Complete a Tic Tac Toe Project using JavaScript', createDate('2024, 6, 12'), 'High', 'Make it simple but look nice', 'Done'))
-addTaskToBoard('My Coding Journey', new Task('My Website', 'Make a personal website using all your skills that shows off your completed projects', createDate('2024, 12, 31'), 'High', 'Take your time and make it perfect', 'ToDo'))
-addTaskToBoard('My Coding Journey', new Task('Admin Dashboard Thing', 'From The Odin Project', '', 'High', '', 'Done'))
-addTaskToBoard('My Coding Journey', new Task('Sign Up form', 'From The Odin Project', '', 'High', '', 'Done'))
-addTaskToBoard('House Maintanence this year', new Task('Seal Driveway', 'Cleane and seal driveway', createDate('2024, 8, 15'), 'Medium', 'Use CT gift cards', 'ToDo'))
-addTaskToBoard('House Maintanence this year', new Task('Replace A/C', 'Replace Broken Air Conditioner', createDate('2024, 6, 1'), 'High', 'PAID', 'Done'))
-addTaskToBoard('House Maintanence this year', new Task('Powerwash', 'Clean outdoor surfaces', createDate('2024, 6, 30'), 'Medium', 'Stain Deck soon after', 'ToDo'))
+// localStorage.clear()
+let boards = []
+if(!localStorage.getItem('boards')) {
+    console.log('in1')
+    initialise()
+    
+    }
+else {
+    
+    console.log('in')
+    console.log(localStorage.getItem('boards'))
 
-let stringBoard = JSON.stringify(boards)
-console.log('string', stringBoard)
-let newBoard = JSON.parse(stringBoard)
-console.log('newboard', newBoard)
+    boards = JSON.parse(localStorage.getItem('boards'))
+   
+    }
+
+
+
+
+
+function initialise() {
+    createBoard("My Coding Journey")
+    createBoard("House Maintanence this year")
+    addTaskToBoard('My Coding Journey', new Task('TODO project', 'Complete a todo list using all the skills you have learned so far', createDate('2024, 6, 15'), 'High', 'Do a Kanban variation of the project', 'In Progress'))
+    addTaskToBoard('My Coding Journey', new Task('Library Project', 'Complete a library using all the skills you have learned so far', createDate('2024, 6, 9'), 'High', 'add filter functionality', 'Done'))
+    addTaskToBoard('My Coding Journey', new Task('Tic Tac Toe', 'Complete a Tic Tac Toe Project using JavaScript', createDate('2024, 6, 12'), 'High', 'Make it simple but look nice', 'Done'))
+    addTaskToBoard('My Coding Journey', new Task('My Website', 'Make a personal website using all your skills that shows off your completed projects', createDate('2024, 12, 31'), 'High', 'Take your time and make it perfect', 'ToDo'))
+    addTaskToBoard('My Coding Journey', new Task('Admin Dashboard Thing', 'From The Odin Project', '', 'High', '', 'Done'))
+    addTaskToBoard('My Coding Journey', new Task('Sign Up form', 'From The Odin Project', '', 'High', '', 'Done'))
+    addTaskToBoard('House Maintanence this year', new Task('Seal Driveway', 'Cleane and seal driveway', createDate('2024, 8, 15'), 'Medium', 'Use CT gift cards', 'ToDo'))
+    addTaskToBoard('House Maintanence this year', new Task('Replace A/C', 'Replace Broken Air Conditioner', createDate('2024, 6, 1'), 'High', 'PAID', 'Done'))
+    addTaskToBoard('House Maintanence this year', new Task('Powerwash', 'Clean outdoor surfaces', createDate('2024, 6, 30'), 'Medium', 'Stain Deck soon after', 'ToDo'))
+}
+
+
+
+
+function getBoards() {
+    const boards = localStorage.getItem('boards')
+}
+
+function storeBoards() {
+    const string = JSON.stringify(boards)
+    localStorage.setItem('boards', string)
+}
 
 // create new board object - statuses array has 3 premade inputs
 function createBoard(boardname) {
     
     let board = {name: boardname, tasks: [], statuses: ["ToDo", "In Progress", "Done"]}
     boards.push(board)
+    storeBoards()
 }
 
 // add task object to board in master list
@@ -43,6 +72,8 @@ function addTaskToBoard(boardname, task) {
             boards[i].tasks.push(task)
         }
     } 
+    storeBoards()
+
 }
 
 // add status to statuses array in board object
@@ -53,6 +84,7 @@ function addStatusToBoard(boardname, status) {
             
         }
     }
+    storeBoards()
     
 }
 
@@ -60,6 +92,7 @@ function addStatusToBoard(boardname, status) {
 function deleteBoard(board){
     let index = boards.indexOf(board)
     boards.splice(index, 1)
+    storeBoards()
     
 }
 
@@ -87,6 +120,7 @@ function removeStatus(board, status){
             board['statuses'].splice(index, 1)
         }
     }
+    storeBoards()
 }
 
 // delete task from specified board
@@ -95,7 +129,8 @@ function deleteTask(task, board) {
         if (board['tasks'][i] === task){
             board['tasks'].splice(i, 1)
         }
-    }}
+    }
+    storeBoards()}
 
 function findBoardFromBoardName(boardname){
     for(let i = 0; i < boards.length; i++) {
@@ -111,7 +146,8 @@ function replaceTask(task, newTask, boardName) {
         if (board['tasks'][i] === task){
             board['tasks'][i] = newTask
         }
-    }}
+    }
+    storeBoards()}
 
 function deleteAllTasksWithStatus(board, status) {
     const fullTaskList = board['tasks'].length
@@ -123,6 +159,7 @@ function deleteAllTasksWithStatus(board, status) {
         }
         counter++
     }
+    storeBoards()
 }
 
 

@@ -1,4 +1,4 @@
-import { createBoard, boards } from "./board";
+import { createBoard, boards } from "./board.js";
 import { confirmDeleteBoard } from "./lastchancehandler";
 import { updateBoardPage, updateMasterBoardPage } from ".";
 import deleteIcon from "./img/trash-2.svg"
@@ -122,6 +122,7 @@ function createMasterBoardTitle(){
 
 function createMasterTaskTrackerNode() {
     let numTotalTasks = 0
+    
     for (let i = 0; i < boards.length; i++){
         numTotalTasks += boards[i]['tasks'].length
     }
