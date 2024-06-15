@@ -34,8 +34,10 @@ function fillTaskCollection(taskCollection){
     for (let i in boards) {
         
         for (let x in boards[i]['tasks']){
-            
-            taskCollection.appendChild(taskCardCreater(boards[i]['tasks'][x], boards[i]))
+            const card = taskCardCreater(boards[i]['tasks'][x], boards[i])
+            card.classList.remove('draggable')
+            card.setAttribute('draggable', false)
+            taskCollection.appendChild(card, boards[i])
         }
     }
 }
@@ -80,6 +82,8 @@ function fillMasterTaskCollection() {
 function createStatusContainer(name) {
     const statusContainer = document.createElement('div')
     statusContainer.classList.add('status-column')
+    statusContainer.classList.add('draggable-status')
+    statusContainer.setAttribute('draggable', 'true')
     statusContainer.dataset.statusName = name
     return statusContainer
 }
@@ -226,6 +230,8 @@ function createTaskContainer(task) {
     const taskDiv = document.createElement('div')
     taskDiv.classList.add('task-container')
     taskDiv.classList.add(task.priority.replace(/\s/g, ''))
+    taskDiv.classList.add('draggable')
+    taskDiv.setAttribute('draggable', 'true')
     return taskDiv
 }
 // create title for task card

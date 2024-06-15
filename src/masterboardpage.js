@@ -36,15 +36,6 @@ function masterBoardContent() {
     return boardDiv
 }
 
-// function dateFilter() {
-//     const parent = document.querySelector('.master-task-container')
-//     let list = parent.children
-//     console.log(list)
-//     for (let x = 0; x < list.length; x++){
-//         console.log(list[x].children[1].textContent)
-    
-//     }}
-
 // create board title heading
 function masterBoardTitle(){
     const title = document.createElement('h1');

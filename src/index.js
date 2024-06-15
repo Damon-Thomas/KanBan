@@ -2,6 +2,7 @@ import {homeHeader, homeContent} from './homepage';
 import { boardHeader, boardContent } from './boardpage';
 import './styles.css';
 import { MasterBoardHeader, masterBoardContent } from './masterboardpage';
+import { dragIt } from './draggables';
 // import { boardContent } from './boardpage';
 
 
@@ -32,6 +33,7 @@ function updateBoardPage(boardName) {
     main.innerHTML = ""
     header.appendChild(boardHeader(boardName))
     main.appendChild(boardContent(boardName))
+    dragIt()
 }
 
 function updateMasterBoardPage() {
@@ -40,5 +42,10 @@ function updateMasterBoardPage() {
     header.appendChild(MasterBoardHeader())
     main.appendChild(masterBoardContent())
 }
+
+
+
+
+
 
 export {updateHomePage, updateBoardPage, updateMasterBoardPage}

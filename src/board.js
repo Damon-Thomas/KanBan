@@ -13,14 +13,13 @@ function createDate(date) {
 // localStorage.clear()
 let boards = []
 if(!localStorage.getItem('boards')) {
-    console.log('in1')
+    
     initialise()
     
     }
 else {
     
-    console.log('in')
-    console.log(localStorage.getItem('boards'))
+    
 
     boards = JSON.parse(localStorage.getItem('boards'))
    
@@ -47,9 +46,7 @@ function initialise() {
 
 
 
-function getBoards() {
-    const boards = localStorage.getItem('boards')
-}
+
 
 function storeBoards() {
     const string = JSON.stringify(boards)
@@ -84,6 +81,67 @@ function addStatusToBoard(boardname, status) {
             
         }
     }
+    storeBoards()
+    
+}
+
+function changeTaskStatus(taskName, newStatus, boardName) {
+    const board = findBoardFromBoardName(boardName)
+    for (let x in board['tasks']) {
+        if (board['tasks'][x].title === taskName) {
+            board['tasks'][x].status = newStatus
+        }
+    }
+    storeBoards()
+    console.log(boards)
+    
+}
+
+function changeStatusOrder(moveStatus, insertBeforeStatus, boardName) {
+    console.log('test', insertBeforeStatus)
+    console.log('moveStatus', moveStatus)
+    
+    
+    
+    const board = findBoardFromBoardName(boardName)
+    let index = board['statuses'].indexOf(moveStatus)
+    board['statuses'].splice(index, 1)
+
+    if (insertBeforeStatus === undefined) {
+        index = board['statuses'].length
+        console.log('undefined', index)
+        board['statuses'].splice(index, 0, moveStatus)
+    }
+    else {
+        index = board['statuses'].indexOf(insertBeforeStatus)
+        console.log('order', index)
+        board['statuses'].splice(index, 0, moveStatus)
+    }
+    
+    
+
+    
+    
+    storeBoards()
+    console.log('statuses', board['statuses'])
+}
+
+function getTask(taskName, board) {
+    for (let x in board['tasks']) {
+        if (board['tasks'][x].title === taskName)
+            return board['tasks'][x]}
+}
+function changeTaskOrder(topTask, bottomTask, boardName) {
+    const board = findBoardFromBoardName(boardName)
+    const insertTask = getTask(topTask, board)
+    let index = board['tasks'].indexOf(insertTask)
+    console.log(index)
+    board['tasks'].splice(index, 1)
+
+    const afterTask = getTask(bottomTask, board)
+    index = board['tasks'].indexOf(afterTask)
+    board['tasks'].splice(index, 0, insertTask)
+
     storeBoards()
     
 }
@@ -125,6 +183,8 @@ function removeStatus(board, status){
 
 // delete task from specified board
 function deleteTask(task, board) {
+    console.log('board', board)
+    console.log('task', task)
     for (let i=0; i < board['tasks'].length; i++) {
         if (board['tasks'][i] === task){
             board['tasks'].splice(i, 1)
@@ -178,4 +238,4 @@ function Task(title, description, deadline, priority, notes, status) {
 
 
 
-export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, removeStatus, deleteTask, replaceTask, deleteAllTasksWithStatus, findBoardFromBoardName, createDate}
+export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, changeStatusOrder, changeTaskOrder, removeStatus, deleteTask, replaceTask, deleteAllTasksWithStatus, findBoardFromBoardName, createDate, changeTaskStatus}

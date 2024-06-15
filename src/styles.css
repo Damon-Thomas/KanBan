@@ -325,6 +325,7 @@ background: linear-gradient(0deg, var(--dark-overlay) 80%, var(--accent) 80%);
     height: 2.5rem;
     box-shadow: 2px 2px 4px var(--back-ground);
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 #status-form {
@@ -578,6 +579,7 @@ fieldset > div > input {
     font-size: .75rem;
     height: .9rem;
     color: var(--back-ground);
+    cursor: pointer;
 }
 .task-title {
     height: 2.2rem;
@@ -585,6 +587,7 @@ fieldset > div > input {
     font-weight: 800;
     line-height: 1.1;
     color: var(--back-ground);
+    cursor: pointer;
     
 }
 
@@ -595,6 +598,7 @@ fieldset > div > input {
     align-items: center;
     text-align: center;
     gap: .25rem;
+    cursor: pointer;
 }
 
 .status-header-buttons {
@@ -639,4 +643,13 @@ fieldset > div > input {
 ::backdrop{
     background-color: var(--back-ground);
     opacity: .9;
+}
+
+.draggable, .draggable-status {
+    cursor: move;
+}
+
+.draggable.dragging {
+    opacity: .5;
+    
 }

@@ -73,7 +73,6 @@ function dateSortDescending() {
                 if (sortedList.includes(array[i]) === false) {
                     sortedList.push(array[i])}
         }
-    debugger
 
     }
     return sortedList
