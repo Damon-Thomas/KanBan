@@ -1,9 +1,7 @@
 import CloseIcon from "./img/Cancel-Button.svg"
 import { updateBoardPage, updateMasterBoardPage } from "./index.js"
-import { addTaskToBoard } from "./board.js"
 import { Task } from "./board.js";
 import { replaceTask } from "./board.js";
-import { createDate } from "./board.js";
 
 
 // make dialog to control form as modal
@@ -63,21 +61,6 @@ function noLabelInput(formLabel, taskValue) {
   formDiv.appendChild(createInput)
   return formDiv
 
-}
-    // template for text inputs
-function createTextFormInput(formLabel, userPrompt, taskValue) {
-  const createLabel = document.createElement('label')
-  createLabel.setAttribute("for", formLabel)
-  createLabel.textContent = userPrompt
-  const createInput = document.createElement('input')
-  createInput.setAttribute("type", "text")
-  createInput.setAttribute("name", formLabel)
-  createInput.id = formLabel
-  createInput.value = taskValue
-  const formDiv = document.createElement('div')
-  formDiv.appendChild(createLabel)
-  formDiv.appendChild(createInput)
-  return formDiv
 }
 
 function createTextAreaFormInput(formLabel, userPrompt, taskValue) {

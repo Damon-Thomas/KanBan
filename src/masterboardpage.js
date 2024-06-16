@@ -1,8 +1,5 @@
-import { createStatusModal } from "./statusModal.js";
-import {masterHandler, statusHandler} from "./status.js"
-import { updateHomePage, updateMasterBoardPage } from "./index.js";
-import {createTaskModal} from "./createTaskModal.js"
-import { createDeleteStatusModal } from "./deletestatusmodal.js";
+import {masterHandler} from "./status.js"
+import { updateMasterBoardPage } from "./index.js";
 import { returnHome } from "./boardpage.js";
 import calender from "./img/calendar.svg"
 import upArrow from "./img/arrow-up.svg"

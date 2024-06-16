@@ -2,8 +2,6 @@ import CloseIcon from "./img/Cancel-Button.svg"
 import { updateBoardPage } from "./index.js"
 import { addTaskToBoard } from "./board.js"
 import { Task } from "./board.js";
-import { format, compareAsc } from "date-fns";
-import { createDate } from "./board.js";
 
 
 // make dialog to control form as modal

@@ -7,10 +7,7 @@ import { createDeleteStatusModal, openDeleteStatusModal } from "./deletestatusmo
 import deleteIcon from "./img/trash-2.svg"
 import addIcon from "./img/plus-square.svg"
 import { createDate } from "./board.js"
-import { format, compareAsc } from "date-fns";
-// import { dateFilter } from "./masterboardpage.js"
-// status column handler
-// create status columns and create new button
+
 function statusHandler(boardName) {
     
     const statusCollection = createStatusCollection()
@@ -49,11 +46,6 @@ function createMasterTaskCollection() {
     return taskCollection
 }
 
-function createTaskCollection() {
-    const taskCollection = document.createElement('div')
-    taskCollection.classList.add('task-container')
-    return taskCollection
-}
 
 // create main status div
 function createStatusCollection() {
@@ -74,9 +66,7 @@ function fillStatusCollection(statusCollection, boardName){
         }
 }
 
-function fillMasterTaskCollection() {
-    return
-}
+
 
 // create status column with name set as dataset
 function createStatusContainer(name) {

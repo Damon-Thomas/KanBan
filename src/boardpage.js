@@ -4,6 +4,7 @@ import { updateHomePage } from "./index.js";
 import {createTaskModal} from "./createTaskModal.js"
 import { createDeleteStatusModal } from "./deletestatusmodal.js";
 import HomeIcon from "./img/home.svg"
+
 // header containing home button and board title
 function boardHeader(boardName) {
     const headerDiv = document.createElement('div')
