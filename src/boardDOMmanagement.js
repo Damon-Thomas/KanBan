@@ -64,7 +64,8 @@ function createBoardNode(activeBoard){
     boardDiv.appendChild(createDeleteBoardButton(boardDiv, activeBoard))
     boardDiv.appendChild(createBoardTitle(activeBoard))
     boardDiv.appendChild(createTaskTrackerNode(activeBoard))
-    
+    boardDiv.classList.add('draggable-board')
+    boardDiv.setAttribute('draggable', 'true')
     boardDiv.addEventListener("click", function(event) {
         toBoardPage(event, boardDiv, activeBoard)
     })

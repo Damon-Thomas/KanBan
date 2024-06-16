@@ -1,6 +1,5 @@
 import {boardList, masterBoardNode} from './boardDOMmanagement.js';
 import {createBoardModal, openModal} from "./boardmodal.js"
-import { masterBoardContent } from './masterboardpage.js';
 
 // Homepage Title Manager
 function homeHeader() {

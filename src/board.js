@@ -1,14 +1,9 @@
 // master board handling
-
-
-import { format, compareAsc } from "date-fns";
-
+import { format } from "date-fns";
 
 function createDate(date) {
     return format(new Date(date), "PP")
 }
-
-
 
 // localStorage.clear()
 let boards = []
@@ -25,10 +20,6 @@ else {
    
     }
 
-
-
-
-
 function initialise() {
     createBoard("My Coding Journey")
     createBoard("House Maintanence this year")
@@ -36,17 +27,12 @@ function initialise() {
     addTaskToBoard('My Coding Journey', new Task('Library Project', 'Complete a library using all the skills you have learned so far', createDate('2024, 6, 9'), 'High', 'add filter functionality', 'Done'))
     addTaskToBoard('My Coding Journey', new Task('Tic Tac Toe', 'Complete a Tic Tac Toe Project using JavaScript', createDate('2024, 6, 12'), 'High', 'Make it simple but look nice', 'Done'))
     addTaskToBoard('My Coding Journey', new Task('My Website', 'Make a personal website using all your skills that shows off your completed projects', createDate('2024, 12, 31'), 'High', 'Take your time and make it perfect', 'ToDo'))
-    addTaskToBoard('My Coding Journey', new Task('Admin Dashboard Thing', 'From The Odin Project', '', 'High', '', 'Done'))
-    addTaskToBoard('My Coding Journey', new Task('Sign Up form', 'From The Odin Project', '', 'High', '', 'Done'))
+    addTaskToBoard('My Coding Journey', new Task('Admin Dashboard Thing', 'From The Odin Project', '', 'Medium', '', 'Done'))
+    addTaskToBoard('My Coding Journey', new Task('Sign Up form', 'From The Odin Project', '', 'Low', '', 'Done'))
     addTaskToBoard('House Maintanence this year', new Task('Seal Driveway', 'Cleane and seal driveway', createDate('2024, 8, 15'), 'Medium', 'Use CT gift cards', 'ToDo'))
     addTaskToBoard('House Maintanence this year', new Task('Replace A/C', 'Replace Broken Air Conditioner', createDate('2024, 6, 1'), 'High', 'PAID', 'Done'))
     addTaskToBoard('House Maintanence this year', new Task('Powerwash', 'Clean outdoor surfaces', createDate('2024, 6, 30'), 'Medium', 'Stain Deck soon after', 'ToDo'))
 }
-
-
-
-
-
 
 function storeBoards() {
     const string = JSON.stringify(boards)
@@ -93,37 +79,41 @@ function changeTaskStatus(taskName, newStatus, boardName) {
         }
     }
     storeBoards()
-    console.log(boards)
+    
     
 }
 
 function changeStatusOrder(moveStatus, insertBeforeStatus, boardName) {
-    console.log('test', insertBeforeStatus)
-    console.log('moveStatus', moveStatus)
-    
-    
-    
     const board = findBoardFromBoardName(boardName)
     let index = board['statuses'].indexOf(moveStatus)
     board['statuses'].splice(index, 1)
 
     if (insertBeforeStatus === undefined) {
         index = board['statuses'].length
-        console.log('undefined', index)
         board['statuses'].splice(index, 0, moveStatus)
     }
     else {
         index = board['statuses'].indexOf(insertBeforeStatus)
-        console.log('order', index)
         board['statuses'].splice(index, 0, moveStatus)
     }
-    
-    
-
-    
-    
     storeBoards()
-    console.log('statuses', board['statuses'])
+}
+
+function changeBoardOrder(moveBoardName, afterBoardName) {
+    const board = findBoardFromBoardName(moveBoardName)
+    const afterBoard = findBoardFromBoardName(afterBoardName)
+    let index = boards.indexOf(board)
+    boards.splice(index, 1)
+
+    if (afterBoardName === undefined) {
+        index = boards.length
+        boards.splice(index, 0, board)
+    }
+    else {
+        index = boards.indexOf(afterBoard)
+        boards.splice(index, 0, board)
+    }
+    storeBoards()
 }
 
 function getTask(taskName, board) {
@@ -135,7 +125,6 @@ function changeTaskOrder(topTask, bottomTask, boardName) {
     const board = findBoardFromBoardName(boardName)
     const insertTask = getTask(topTask, board)
     let index = board['tasks'].indexOf(insertTask)
-    console.log(index)
     board['tasks'].splice(index, 1)
 
     const afterTask = getTask(bottomTask, board)
@@ -154,22 +143,6 @@ function deleteBoard(board){
     
 }
 
-function dateList() {
-    const dateList = []
-    for (let i in boards) {
-        for (let x in boards['tasks']) {
-            let dateHandler = x.deadline
-            if (x.deadline != "") {
-                continue}
-            for (let p = 0; p < 2; p++) {
-          
-            dateHandler = dateHandler.replace('-', ', ')
-            dateHandler = dateHandler.replace(' 0', ' ')
-        }
-        }
-    }
-}
-
 // delete status from specified board
 function removeStatus(board, status){
     for (let i = 0; i < (board['statuses'].length); i++){
@@ -183,8 +156,6 @@ function removeStatus(board, status){
 
 // delete task from specified board
 function deleteTask(task, board) {
-    console.log('board', board)
-    console.log('task', task)
     for (let i=0; i < board['tasks'].length; i++) {
         if (board['tasks'][i] === task){
             board['tasks'].splice(i, 1)
@@ -238,4 +209,4 @@ function Task(title, description, deadline, priority, notes, status) {
 
 
 
-export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, changeStatusOrder, changeTaskOrder, removeStatus, deleteTask, replaceTask, deleteAllTasksWithStatus, findBoardFromBoardName, createDate, changeTaskStatus}
+export {Task, boards, createBoard, addTaskToBoard, addStatusToBoard, deleteBoard, changeBoardOrder, changeStatusOrder, changeTaskOrder, removeStatus, deleteTask, replaceTask, deleteAllTasksWithStatus, findBoardFromBoardName, createDate, changeTaskStatus}

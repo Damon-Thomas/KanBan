@@ -2,7 +2,7 @@ import {homeHeader, homeContent} from './homepage';
 import { boardHeader, boardContent } from './boardpage';
 import './styles.css';
 import { MasterBoardHeader, masterBoardContent } from './masterboardpage';
-import { dragIt } from './draggables';
+import { dragIt, homeDragIt } from './draggables';
 // import { boardContent } from './boardpage';
 
 
@@ -24,6 +24,7 @@ function updateHomePage() {
     main.innerHTML = ""
     header.appendChild(homeHeader())
     main.appendChild(homeContent())
+    homeDragIt()
 }
 
 updateHomePage()
